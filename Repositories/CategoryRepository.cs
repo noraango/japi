@@ -4,6 +4,7 @@ using api.Repositories.Dependencies;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using api.Models.DBModels;
+using System.Linq;
 
 namespace api.Repositories
 {
@@ -14,6 +15,32 @@ namespace api.Repositories
         public CategoryRepository(Context context)
         {
             this._context = context;
+        }
+
+        public async Task<IEnumerable<Category>> GetListCategory()
+        {
+            if (_context != null)
+            {
+                return await _context.Category.ToListAsync();
+            }
+            return null;
+        }
+
+        public async Task<IEnumerable<Category>> GetCategoriesByLevel(int level)
+        {
+            if (_context != null)
+            {
+                return await _context.Category.AsQueryable().Where(x => x.Level == level).ToListAsync();
+            }
+            return null;
+        }
+        public async Task<IEnumerable<Category>> GetSubcategoriesById(int id)
+        {
+            if (_context != null)
+            {
+                return await _context.Category.AsQueryable().Where(x => x.BelongToCategoryId == id && x.Level != 1).ToListAsync();
+            }
+            return null;
         }
 
         public async Task<int> CreateCategory(Category category)
@@ -44,15 +71,6 @@ namespace api.Repositories
             if (_context != null)
             {
                 return await _context.Category.FirstOrDefaultAsync(item => item.Id == id);
-            }
-            return null;
-        }
-
-        public async Task<IEnumerable<Category>> GetListCategory()
-        {
-            if (_context != null)
-            {
-                return await _context.Category.ToListAsync();
             }
             return null;
         }

@@ -31,6 +31,7 @@ namespace api
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "api", Version = "v1" });
             });
             services.AddScoped<ICategoryRepository, CategoryRepository>();
+            services.AddCors();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -47,7 +48,7 @@ namespace api
 
             app.UseRouting();
 
-            app.UseCors(allowSpecificOrigins);
+            app.UseCors(builder => builder.WithOrigins("http://localhost:3000"));
 
             app.UseAuthorization();
 

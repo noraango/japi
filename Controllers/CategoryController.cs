@@ -82,6 +82,42 @@ namespace api.Controllers
             }
         }
 
+        [HttpGet("level/{level}")]
+        public async Task<IActionResult> GetCategoriesByLevel(int level)
+        {
+            try
+            {
+                var cate = await _CategoryRepository.GetCategoriesByLevel(level);
+                if (cate == null)
+                {
+                    return NotFound();
+                }
+                return Ok(cate);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpGet("subcategory/{id}")]
+        public async Task<IActionResult> GetSubcategoriesById(int id)
+        {
+            try
+            {
+                var cate = await _CategoryRepository.GetSubcategoriesById(id);
+                if (cate == null)
+                {
+                    return NotFound();
+                }
+                return Ok(cate);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
         [HttpPost]
         [Route("Update")]
         public async Task<IActionResult> UpdateCategory()
