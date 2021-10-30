@@ -1,4 +1,3 @@
-using System;
 namespace api.Models.DBModels
 {
     public class Category
