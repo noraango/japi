@@ -9,5 +9,7 @@ namespace api.Repositories.Data
         }
         public DbSet<api.Models.DBModels.Category> Category { get; set; }
         public DbSet<api.Models.DBModels.Product> Product { get; set; }
+        public DbSet<api.Models.DBModels.Image> Image { get; set; }
+        public DbSet<api.Models.DBModels.ProductStatus> ProductStatus { get; set; }
     }
 }

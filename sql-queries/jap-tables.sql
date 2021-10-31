@@ -1,7 +1,7 @@
-﻿/*Chạy file sql này 2 lần*/
+﻿/*drop database [JAP];
+create database [JAP];*/
 
 drop table Category;
-
 CREATE TABLE [Category] (
   [Id] int IDENTITY(1,1) PRIMARY KEY,
   [Name] nvarchar(200),
@@ -26,26 +26,26 @@ insert into Category(Name,Level,BelongToCategoryId) values
 
 /*select * from Category;*/
 
-drop table [Product.Status];
-CREATE TABLE [Product.Status] (
+drop table [ProductStatus];
+CREATE TABLE [ProductStatus] (
   [Id] int IDENTITY(1,1) PRIMARY KEY,
   [Code] varchar(10),
   [Name] nvarchar(50),
 );
 
-insert into [Product.Status](Code,Name) values
+insert into [ProductStatus](Code,Name) values
 ('P1',N'Đang trưng bày'),
 ('P2',N'Trong kho')
 
 /*select * from [Product.Status];*/
 
-drop table [Product.PackingMethod]
-CREATE TABLE [Product.PackingMethod] (
+drop table [ProductPackingMethod]
+CREATE TABLE [ProductPackingMethod] (
   [Id] int IDENTITY(1,1) PRIMARY KEY,
   [Name] nvarchar(200),
 );
 
-insert into [Product.PackingMethod](Name) values
+insert into [ProductPackingMethod](Name) values
 (N'Thùng 24 hộp'),
 (N'Thùng 12 hộp'),
 (N'Hộp 550ml'),
@@ -174,8 +174,8 @@ insert into Product(Code,[Name],Price,Size,[Weight],Quantity,Manufacturer,ShortD
 
 /*tạo table user.role*/
 
-drop table [User.Role];
-CREATE TABLE [User.Role] (
+drop table [UserRole];
+CREATE TABLE [UserRole] (
   [Id] int IDENTITY(1,1) PRIMARY KEY,
   [Code] varchar(10),
   [Name] nvarchar(50),
@@ -183,7 +183,7 @@ CREATE TABLE [User.Role] (
 
 
 
-insert into [User.Role](Code,[Name]) values
+insert into [UserRole](Code,[Name]) values
 ('U1','Admin'),
 ('U2','Seller'),
 ('U3','Staff');

@@ -20,12 +20,12 @@ namespace api.Controllers
         {
             try
             {
-                var cateList = await _ProductRepository.GetProducts(quantity);
-                if (cateList == null)
+                var result = await _ProductRepository.GetProducts(quantity);
+                if (result == null)
                 {
                     return NotFound();
                 }
-                return Ok(cateList);
+                return Ok(result);
             }
             catch (Exception)
             {
