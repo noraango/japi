@@ -14,6 +14,83 @@ namespace api.Controllers
         {
             _ProductRepository = productRepository;
         }
+
+        [HttpGet]
+        [Route("status")]
+        public async Task<IActionResult> GetStatus()
+        {
+            try
+            {
+                var result = await _ProductRepository.GetStatuses();
+                if (result == null)
+                {
+                    return NotFound();
+                }
+                return Ok(result);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpGet]
+        [Route("packing")]
+        public async Task<IActionResult> GetPacking()
+        {
+            try
+            {
+                var result = await _ProductRepository.GetPackMethods();
+                if (result == null)
+                {
+                    return NotFound();
+                }
+                return Ok(result);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpGet]
+        [Route("origin")]
+        public async Task<IActionResult> GetOrigin()
+        {
+            try
+            {
+                var result = await _ProductRepository.GetOrigins();
+                if (result == null)
+                {
+                    return NotFound();
+                }
+                return Ok(result);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpPost]
+        [Route("create")]
+        public async Task<IActionResult> CreateProduct(int quantity)
+        {
+            try
+            {
+                var result = await _ProductRepository.GetProducts(quantity);
+                if (result == null)
+                {
+                    return NotFound();
+                }
+                return Ok(result);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
         [HttpGet]
         [Route("getlist")]
         public async Task<IActionResult> GetProducts(int quantity)
@@ -39,6 +116,10 @@ namespace api.Controllers
         {
             try
             {
+                if (string.IsNullOrWhiteSpace(querySearch))
+                {
+                    querySearch = "";
+                }
                 int currentPage = CurrentPage != null ? (int)CurrentPage : 1;
                 int pageSize = PageSize != null ? (int)PageSize : 9;
                 var gameModelList = await _ProductRepository.Search(querySearch, currentPage, pageSize);

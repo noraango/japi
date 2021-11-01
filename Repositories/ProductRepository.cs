@@ -16,6 +16,34 @@ namespace api.Repositories
         {
             this._context = context;
         }
+
+        public async Task<IEnumerable<ProductStatus>> GetStatuses()
+        {
+            if (_context != null)
+            {
+                return await _context.ProductStatus.ToListAsync();
+            }
+            return null;
+        }
+
+        public async Task<IEnumerable<ProductPackingMethod>> GetPackMethods()
+        {
+            if (_context != null)
+            {
+                return await _context.ProductPackingMethod.ToListAsync();
+            }
+            return null;
+        }
+
+        public async Task<IEnumerable<Origin>> GetOrigins()
+        {
+            if (_context != null)
+            {
+                return await _context.Origin.ToListAsync();
+            }
+            return null;
+        }
+
         public async Task<IEnumerable<ProductModel>> GetProducts(int quantity)
         {
             if (_context != null)
@@ -49,6 +77,7 @@ namespace api.Repositories
                 {
                     var model = new ProductModel();
                     model.Id = item.Id;
+                    model.Code = item.Code;
                     model.Name = item.Name;
                     model.Quantity = item.Quantity;
                     model.Price = item.Price;
