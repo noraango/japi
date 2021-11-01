@@ -14,5 +14,7 @@ namespace api.Repositories.Data
         public DbSet<api.Models.DBModels.ProductPackingMethod> ProductPackingMethod { get; set; }
         public DbSet<api.Models.DBModels.Origin> Origin { get; set; }
         public DbSet<api.Models.DBModels.Storage> Storage { get; set; }
+        public DbSet<api.Models.DBModels.User> User { get; set; }
+        public DbSet<api.Models.DBModels.UserRole> UserRole { get; set; }
     }
 }
