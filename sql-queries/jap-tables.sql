@@ -151,22 +151,7 @@ CREATE TABLE [Product] (
   [PackingMethodId] int,
   [ProductStatusId] int,
   [DisplayImageId] int,
-  [StorageId] int,
-    CONSTRAINT [FK_Product.ProductStatusId]
-		FOREIGN KEY ([ProductStatusId])
-			REFERENCES [ProductStatus]([Id]),
-	CONSTRAINT [FK_Product.OriginId]
-		FOREIGN KEY ([OriginId])
-			REFERENCES [Origin]([Id]),
-	CONSTRAINT [FK_Product.PackingMethodId]
-		FOREIGN KEY ([PackingMethodId])
-			REFERENCES [ProductPackingMethod]([Id]),
-	CONSTRAINT [FK_Product.DisplayImageId]
-		FOREIGN KEY ([DisplayImageId])
-			REFERENCES [Image]([Id]),
-	CONSTRAINT [FK_Product.StorageId]
-		FOREIGN KEY ([StorageId])
-			REFERENCES [Storage]([Id])
+  [StorageId] int
 );
 insert into Product(Code,[Name],Price,Size,[Weight],Quantity,Manufacturer,ShortDescription,[Description],Brand,OriginId,PackingMethodId,ProductStatusId,DisplayImageId,StorageId) values
 ('P0001',N'Củ hành',50000,50,500,100,N'Nông trại vui vẻ',N'Đây là củ hành',N'Đây cũng là củ hành',N'Vui vẻ',2,2,1,1,1),
