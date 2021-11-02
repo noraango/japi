@@ -8,7 +8,7 @@ namespace api.Repositories.Dependencies
     {
         Task<int> Create(Storage item);
         Task<IEnumerable<Storage>> Read();
-        Task<int> Update(Storage item);
+        Task<int> Update(Storage data);
         Task<int> Delete(int id);
     }
 }

@@ -6,6 +6,7 @@ using api.Repositories.Dependencies;
 using api.Repositories.Data;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
+using System;
 namespace api.Repositories
 {
     public class ProductRepository : IProductRepository
@@ -59,7 +60,7 @@ namespace api.Repositories
                     model.Price = item.Price;
                     model.DisplayImageId = item.DisplayImageId;
                     var image = await _context.Image.FirstAsync(x => x.Id == item.DisplayImageId);
-                    model.DisplayImageFilePath = image.FilePath;
+                    model.DisplayImageName = image.FilePath;
                     result.Add(model);
                 }
                 return result;
@@ -84,13 +85,46 @@ namespace api.Repositories
                     model.DisplayImageId = item.DisplayImageId;
                     var image = await _context.Image.FirstAsync(x => x.Id == item.DisplayImageId);
                     var status = await _context.ProductStatus.FirstAsync(x => x.Id == item.ProductStatusId);
-                    model.DisplayImageFilePath = image.FilePath;
+                    model.DisplayImageName = image.FilePath;
                     model.Status = status.Name;
                     result.Add(model);
                 }
                 return result;
             }
             return null;
+        }
+
+        public async Task<int> Create(ProductModel item)
+        {
+            try
+            {
+
+                if (_context != null)
+                {
+                    var product = new Product();
+                    product.Code = item.Code;
+                    product.Name = item.Name;
+                    product.Price = item.Price;
+                    product.Size = item.Size;
+                    product.Weight = item.Weight;
+                    product.Quantity = item.Quantity;
+                    product.Manufacturer = item.Manufacturer;
+                    product.ShortDescription = item.ShortDescription;
+                    product.Description = item.Description;
+                    product.Brand = item.Brand;
+                    product.OriginId = item.OriginId;
+                    product.PackingMethodId = item.PackingMethodId;
+                    product.ProductStatusId = item.ProductStatusId;
+                    product.StorageId = item.StorageId;
+                    await _context.Product.AddAsync(product);
+                    return await _context.SaveChangesAsync();
+                }
+                return 0;
+            }
+            catch (Exception e)
+            {
+                return 0;
+            }
         }
     }
 }

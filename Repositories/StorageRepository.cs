@@ -1,8 +1,10 @@
 using System.Collections.Generic;
-using System.Threading.Tasks;
-using api.Models.DBModels;
-using api.Repositories.Dependencies;
 using api.Repositories.Data;
+using api.Repositories.Dependencies;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using api.Models.DBModels;
+using System.Linq;
 namespace api.Repositories
 {
     public class StorageRepository : IStorageRepository
@@ -19,25 +21,38 @@ namespace api.Repositories
             if (_context != null)
             {
                 await _context.Storage.AddAsync(item);
-                await _context.SaveChangesAsync();
-                return 1;
+                return await _context.SaveChangesAsync();
             }
             return 0;
         }
 
-        public Task<int> Delete(int id)
+        public async Task<int> Delete(int id)
         {
-            throw new System.NotImplementedException();
+            if (_context != null)
+            {
+                var item = await _context.Storage.FirstOrDefaultAsync(x => x.Id == id);
+                _context.Storage.Remove(item);
+                return await _context.SaveChangesAsync();
+            }
+            return 0;
         }
 
-        public Task<IEnumerable<Storage>> Read()
+        public async Task<IEnumerable<Storage>> Read()
         {
-            throw new System.NotImplementedException();
+            if (_context != null)
+            {
+                return await _context.Storage.ToListAsync();
+            }
+            return null;
         }
 
-        public Task<int> Update(Storage item)
+        public async Task<int> Update(Storage data)
         {
-            throw new System.NotImplementedException();
+            if (_context != null)
+            {
+                var item = await _context.Storage.FirstOrDefaultAsync(x => x.Id == data.Id);
+            }
+            return 0;
         }
     }
 }
