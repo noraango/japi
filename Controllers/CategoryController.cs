@@ -46,7 +46,7 @@ namespace api.Controllers
         // }
 
         [HttpGet]
-        [Route("GetList")]
+        [Route("get")]
         public async Task<IActionResult> GetCategoryList()
         {
             try

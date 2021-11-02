@@ -1,10 +1,10 @@
 namespace api.Models.DBModels
 {
-    public class Category
+    public class Image
     {
         public int Id { get; set; }
+        public string FilePath { get; set; }
         public string Name { get; set; }
-        public int Level { get; set; }
-        public int? BelongToCategoryId { get; set; }
+        public string Description { get; set; }
     }
 }
