@@ -1,8 +1,9 @@
 ﻿drop table [LocationWard];
 CREATE TABLE [LocationWard](
-	[WardId] [varchar](20) NOT NULL PRIMARY KEY,
-	[Name] [nvarchar](200) NULL,
-	[DistrictId] [varchar](20) NULL,
+	[Id] int IDENTITY(1,1) PRIMARY KEY,
+	[WardId] [varchar](20) NOT NULL,
+	[Name] [nvarchar](200) NOT NULL,
+	[DistrictId] [varchar](20) NOT NULL,
 );
 
 INSERT [LocationWard] ([WardId], [Name], [DistrictId]) VALUES (N'00001', N'Phường Phúc Xá', N'001HH')
