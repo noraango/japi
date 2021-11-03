@@ -7,7 +7,7 @@ namespace api.Repositories.Dependencies
     public interface ICartRepository
     {
         Task<int> AddItemToCart(int productId, int cartId, int quantity);
-        Task<IEnumerable<Cart>> GetCart(int userId);
+        Task<IEnumerable<CartItem>> GetCart(int userId);
         Task<int> DeleteItemFromCart(int ProductId, int CartId);
     }
 }

@@ -7,7 +7,7 @@ namespace api.Models.DBModels
         public string Code { get; set; }
         public DateTime OrderTime { get; set; }
         public string Note { get; set; }
-        public int? UserID { get; set; }
-        public int? OrderStatusID { get; set; }
+        public int? UserId { get; set; }
+        public int? OrderStatusId { get; set; }
     }
 }

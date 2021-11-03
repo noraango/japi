@@ -16,11 +16,13 @@ namespace api.Repositories
         {
             this._context = context;
         }
-        public async Task<IEnumerable<Cart>> GetCart(int userId)
+        public async Task<IEnumerable<CartItem>> GetCart(int userId)
         {
             if (_context != null)
             {
-                var result= await _context.Cart.ToListAsync();
+               
+                var cart= await _context.Cart.FirstOrDefaultAsync(x => x.UserId==userId);
+                var result= await _context.CartItem.AsQueryable().Where(x =>x.CartId ==cart.Id).ToListAsync();
                 return result;
             }
             return null;
