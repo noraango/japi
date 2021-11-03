@@ -1,7 +1,8 @@
 ﻿drop table [LocationProvince];
 CREATE TABLE [LocationProvince](
-	[ProvinceId] [varchar](20) NOT NULL PRIMARY KEY,
-	[Name] [nvarchar](200) NULL,
+	[Id] int IDENTITY(1,1) PRIMARY KEY,
+	[ProvinceId] [varchar](20) NOT NULL,
+	[Name] [nvarchar](200) NOT NULL,
 );
 
 INSERT INTO [LocationProvince] VALUES
