@@ -10,9 +10,9 @@ namespace api.Controllers
     {
         private readonly IStorageRepository _StorageRepository;
 
-        public StorageController(IStorageRepository productRepository)
+        public StorageController(IStorageRepository storageRepository)
         {
-            _StorageRepository = productRepository;
+            _StorageRepository = storageRepository;
         }
 
         [HttpPost]

@@ -81,27 +81,8 @@ namespace api.Controllers
         [Route("create")]
         public async Task<IActionResult> CreateProduct([FromForm] ProductModel productModel)
         {
-            // string code, string name, decimal? price, double? size, double? weight, int? quantity, string manufacturer
-            //                                             , string shortDes, string des, string brand, int? originId, int? packingMethodId
-            //                                             , int? statusId, int? storageId, [FromForm] ImageFileModel imageFile
             try
             {
-                // var item = new ProductModel();
-                // item.Code = code;
-                // item.Name = name;
-                // item.Price = price;
-                // item.Size = size;
-                // item.Weight = weight;
-                // item.Quantity = quantity;
-                // item.Manufacturer = manufacturer;
-                // item.ShortDescription = shortDes;
-                // item.Description = des;
-                // item.Brand = brand;
-                // item.OriginId = originId;
-                // item.PackingMethodId = packingMethodId;
-                // item.ProductStatusId = statusId;
-                // item.StorageId = storageId;
-                // item.DisplayImageName = await FileHandler.SaveImage(imageFile.imageFile, _HostEnvironment.ContentRootPath);
                 productModel.DisplayImageName = await FileHandler.SaveImage(productModel.DisplayImage, _HostEnvironment.ContentRootPath);
                 var result = await _ProductRepository.Create(productModel);
                 return Ok(result);

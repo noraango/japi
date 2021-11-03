@@ -17,7 +17,6 @@ namespace api.Models
         public int? OriginId { get; set; }
         public int? PackingMethodId { get; set; }
         public int? ProductStatusId { get; set; }
-        public int? DisplayImageId { get; set; }
         public int? StorageId { get; set; }
         public string DisplayImageName { get; set; }
         public string Status { get; set; }

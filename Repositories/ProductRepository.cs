@@ -58,9 +58,7 @@ namespace api.Repositories
                     model.Name = item.Name;
                     model.Quantity = item.Quantity;
                     model.Price = item.Price;
-                    model.DisplayImageId = item.DisplayImageId;
-                    var image = await _context.Image.FirstAsync(x => x.Id == item.DisplayImageId);
-                    model.DisplayImageName = image.FilePath;
+                    model.DisplayImageName = item.DisplayImageName;
                     result.Add(model);
                 }
                 return result;
@@ -82,10 +80,8 @@ namespace api.Repositories
                     model.Name = item.Name;
                     model.Quantity = item.Quantity;
                     model.Price = item.Price;
-                    model.DisplayImageId = item.DisplayImageId;
-                    var image = await _context.Image.FirstAsync(x => x.Id == item.DisplayImageId);
+                    model.DisplayImageName = item.DisplayImageName;
                     var status = await _context.ProductStatus.FirstAsync(x => x.Id == item.ProductStatusId);
-                    model.DisplayImageName = image.FilePath;
                     model.Status = status.Name;
                     result.Add(model);
                 }
@@ -116,12 +112,13 @@ namespace api.Repositories
                     product.PackingMethodId = item.PackingMethodId;
                     product.ProductStatusId = item.ProductStatusId;
                     product.StorageId = item.StorageId;
+                    product.DisplayImageName = item.DisplayImageName;
                     await _context.Product.AddAsync(product);
                     return await _context.SaveChangesAsync();
                 }
                 return 0;
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return 0;
             }
