@@ -2,6 +2,9 @@ using System;
 using System.Threading.Tasks;
 using api.Repositories.Dependencies;
 using Microsoft.AspNetCore.Mvc;
+using api.Models;
+using Microsoft.AspNetCore.Hosting;
+using api.Configs;
 namespace api.Controllers
 {
     [Route("Product")]
@@ -9,10 +12,12 @@ namespace api.Controllers
     public class ProductController : ControllerBase
     {
         private readonly IProductRepository _ProductRepository;
+        private readonly IWebHostEnvironment _HostEnvironment;
 
-        public ProductController(IProductRepository productRepository)
+        public ProductController(IProductRepository productRepository, IWebHostEnvironment hostEnvironment)
         {
             _ProductRepository = productRepository;
+            _HostEnvironment = hostEnvironment;
         }
 
         [HttpGet]
@@ -74,18 +79,15 @@ namespace api.Controllers
 
         [HttpPost]
         [Route("create")]
-        public async Task<IActionResult> CreateProduct(int quantity)
+        public async Task<IActionResult> CreateProduct([FromForm] ProductModel productModel)
         {
             try
             {
-                var result = await _ProductRepository.GetProducts(quantity);
-                if (result == null)
-                {
-                    return NotFound();
-                }
+                productModel.DisplayImageName = await FileHandler.SaveImage(productModel.DisplayImage, _HostEnvironment.ContentRootPath);
+                var result = await _ProductRepository.Create(productModel);
                 return Ok(result);
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 return BadRequest();
             }
