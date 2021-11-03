@@ -1,27 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "D:\\fu_2021_3_fall\\capstone-project\\source-code\\api\\api.csproj": {}
+    "C:\\Users\\dotha\\Documents\\GitHub\\japi1\\api.csproj": {}
   },
   "projects": {
-    "D:\\fu_2021_3_fall\\capstone-project\\source-code\\api\\api.csproj": {
+    "C:\\Users\\dotha\\Documents\\GitHub\\japi1\\api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\fu_2021_3_fall\\capstone-project\\source-code\\api\\api.csproj",
+        "projectUniqueName": "C:\\Users\\dotha\\Documents\\GitHub\\japi1\\api.csproj",
         "projectName": "api",
-        "projectPath": "D:\\fu_2021_3_fall\\capstone-project\\source-code\\api\\api.csproj",
-        "packagesPath": "C:\\Users\\timer\\.nuget\\packages\\",
-        "outputPath": "D:\\fu_2021_3_fall\\capstone-project\\source-code\\api\\obj\\",
+        "projectPath": "C:\\Users\\dotha\\Documents\\GitHub\\japi1\\api.csproj",
+        "packagesPath": "C:\\Users\\dotha\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\dotha\\Documents\\GitHub\\japi1\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\timer\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\dotha\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net5.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -85,7 +83,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.402\\RuntimeIdentifierGraph.json"
         }
       }
     }

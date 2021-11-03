@@ -1,5 +1,5 @@
-﻿drop database [JAP];
-create database [JAP];
+﻿--drop database [JAP];
+--create database [JAP];
 
 drop table Category;
 CREATE TABLE [Category] (
@@ -217,10 +217,10 @@ CREATE TABLE [Cart] (
   [Code] nvarchar(50),
   [OrderTime] date,
   [Note] nvarchar(1000),
-  [UserID] int,
-  [OrderStatusID] int,
+  [UserId] int,
+  [OrderStatusId] int,
 );
-insert into Cart(Code,OrderTime,Note,UserID,OrderStatusID) values
+insert into Cart(Code,OrderTime,Note,UserId,OrderStatusId) values
 ('C01','03-11-2021',N'Đóng gói',1,1),
 ('C02','04-11-2021',N'Túi',2,2),
 ('C03','05-11-2021',N'Đựng thùng',3,3),
