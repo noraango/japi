@@ -210,3 +210,133 @@ insert into [User](UserRoleId,EncodedPassword,FirstName,LastName,Phone,Email,[Ad
 
 
 
+/*tạo table Cart*/
+drop table [Cart];
+CREATE TABLE [Cart] (
+  [Id] int IDENTITY(1,1) PRIMARY KEY,
+  [Code] nvarchar(50),
+  [OrderTime] date,
+  [Note] nvarchar(1000),
+  [UserID] int,
+  [OrderStatusID] int,
+);
+insert into Cart(Code,OrderTime,Note,UserID,OrderStatusID) values
+('C01','03-11-2021',N'Đóng gói',1,1),
+('C02','04-11-2021',N'Túi',2,2),
+('C03','05-11-2021',N'Đựng thùng',3,3),
+('C04','07-11-2021',N'Bao',4,4);
+
+select *from Cart
+
+/*tạo table CartItem*/
+drop table [CartItem];
+CREATE TABLE [CartItem] (
+  [Id] int IDENTITY(1,1) PRIMARY KEY,
+  [CartId] int,
+  [ProductId] int,
+  [Quantity] int,
+);
+insert into CartItem(CartId,ProductId,Quantity)values
+(1,6,15),
+(2,7,15),
+(3,8,15),
+(4,9,15),
+(2,12,15),
+(3,15,15),
+(4,16,15),
+(4,19,15),
+(3,25,15),
+(2,24,15),
+(1,33,15);
+--select * from CartItem where CartId = 1;
+
+/*tạo table Order.Status */
+drop table [OrderStatus] ;
+
+CREATE TABLE [OrderStatus] (
+  [Id] int IDENTITY(1,1) PRIMARY KEY,
+  [Code] nvarchar(10),
+  [Name] nvarchar(50),
+);
+insert into  [OrderStatus](Code,[Name]) values
+('O1', N'Chờ xác nhận'),
+('O2', N'Chờ lấy hàng'),
+('O3', N'Đang giao'),
+('O4', N'Đã giao'),
+('O5', N'Đã hủy');
+select * from OrderStatus
+
+/*tạo table OrderItem*/
+drop table [OrderItem];
+CREATE TABLE [OrderItem] (
+  [Id] int IDENTITY(1,1) PRIMARY KEY,
+  [OrderId] int,
+  [ProductId] int,
+  [Quantity] int,
+);
+insert into OrderItem(OrderId,ProductId,Quantity)values
+(1,20,15),
+(2,21,15),
+(3,24,15),
+(4,26,15);
+select * from [OrderItem];
+
+
+
+/*tạo table ShippingCompany*/
+drop table [ShippingCompany];
+CREATE TABLE [ShippingCompany] (
+  [Id] int IDENTITY(1,1) PRIMARY KEY,
+  [Name] nvarchar(50),
+  [Phone] varchar(10),
+  [Email] varchar(100),
+);
+insert into ShippingCompany([Name],Phone,Email) values
+(N'Giao hàng nhanh','1900636677','cskh@ghn.vn'),
+(N'Viettel Post','19008095','support@viettelpost.com.vn'),
+(N'Giao hàng tiết kiệm','18006092','cskh@ghtk.vn');
+select * from ShippingCompany;
+
+/*tạo table Shipper*/
+drop table [Shipper];
+CREATE TABLE [Shipper] (
+  [Id] int IDENTITY(1,1) PRIMARY KEY,
+  [CompanyId] int,
+  [Name] nvarchar(50),
+  [Phone] varchar(10),
+  [Email] varchar(100),
+);
+insert into Shipper(CompanyId,[Name],Phone,Email)values
+(1,N'Nguyễn Văn An','0185662553','nguyenvanan@gmail.com'),
+(1,N'Nguyễn Văn An','0258412985','nguyenvanan@gmail.com'),
+(2,N'Nguyễn Văn An','0366998500','nguyenvanan@gmail.com'),
+(2,N'Nguyễn Văn An','0411557729','nguyenvanan@gmail.com'),
+(3,N'Nguyễn Văn An','081296555','nguyenvanan@gmail.com'),
+(4,N'Nguyễn Văn An','096877114','nguyenvanan@gmail.com');
+select * from Shipper;
+
+/*tạo table Order*/
+drop table [Order];
+CREATE TABLE [Order] (
+  [Id] int IDENTITY(1,1) PRIMARY KEY,
+  [UserId] int,
+  [WeekendDelivery] bit,
+  [EarliestDeliveryDate] date,
+  [LatestDeliveryDate] date,
+  [Address] nvarchar(500),
+
+  [WardId] varchar(20),
+    [DistrictId] varchar(20),
+	  [ProvinceId] varchar(20),
+
+  [OrderStatusId] int,
+  [ShipperID] int,
+);
+insert into [Order](UserId,WeekendDelivery,EarliestDeliveryDate,LatestDeliveryDate,[Address],ProvinceId,DistrictId,WardId,OrderStatusId,ShipperID) values
+(1,'True','2021-12-05','2021-12-01',N'số 12, ngõ 23, đường Lê Đức Thắn/g','00625','019HH','01TTT',1,1),
+(2,'False','2021-12-05','2021-12-01',N'số 12, ngõ 23, đường Lê Đức Thắn/g','00625','019HH','01TTT',2,2),
+(3,'True','2021-12-05','2021-12-01',N'số 12, ngõ 23, đường Lê Đức Thắn/g','00625','019HH','01TTT',3,3),
+(4,'False','2021-12-05','2021-12-01',N'số 12, ngõ 23, đường Lê Đức Thắn/g','00625','019HH','01TTT',4,4),
+(4,'False','2021-12-05','2021-12-01',N'số 12, ngõ 23, đường Lê Đức Thắn/g','00625','019HH','01TTT',4,5);
+
+select * from [Order]
