@@ -1,5 +1,5 @@
-﻿drop database [JAP];
-create database [JAP];
+﻿--drop database [JAP];
+--create database [JAP];
 
 drop table Category;
 CREATE TABLE [Category] (

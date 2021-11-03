@@ -1,8 +1,8 @@
 {
   "runtimeOptions": {
     "additionalProbingPaths": [
-      "C:\\Users\\timer\\.dotnet\\store\\|arch|\\|tfm|",
-      "C:\\Users\\timer\\.nuget\\packages"
+      "C:\\Users\\dotha\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\dotha\\.nuget\\packages"
     ]
   }
 }
