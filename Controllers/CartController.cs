@@ -9,7 +9,7 @@ namespace api.Controllers
 {
     [Route("Cart")]
     [ApiController]
-    public class CartController
+    public class CartController: ControllerBase
     {
         private readonly ICartRepository _CartRepository;
 
@@ -30,7 +30,7 @@ namespace api.Controllers
                 }
                 return Ok(result);
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 return BadRequest();
             }

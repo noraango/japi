@@ -25,8 +25,8 @@ namespace api.Repositories.Data
         public DbSet<api.Models.DBModels.LocationWard> LocationWard { get; set; }
         public DbSet<api.Models.DBModels.Shipper> Shipper{ get; set; }
         public DbSet<api.Models.DBModels.ShippingCompany> ShippingCompany { get; set; }
-        public DbSet<api.Models.DBModels.Shipper> User{ get; set; }
-        public DbSet<api.Models.DBModels.Shipper> UserRole{ get; set; }
+        public DbSet<api.Models.DBModels.User> User{ get; set; }
+        public DbSet<api.Models.DBModels.UserRole> UserRole{ get; set; }
 
     }
 }

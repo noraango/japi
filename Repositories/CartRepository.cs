@@ -20,7 +20,9 @@ namespace api.Repositories
         {
             if (_context != null)
             {
-                return await _context.Cart.ToListAsync();
+                
+                var result= await _context.Cart.ToListAsync();
+                return result;
             }
             return null;
         }
@@ -28,7 +30,7 @@ namespace api.Repositories
         {
             return 0;
         }
-        public async Task<int> DeleteItemFromCart(int ProductId, int CartId)
+        public async Task<int> DeleteItemFromCart(int productId, int cartId)
         {
             return 0;
         }

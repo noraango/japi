@@ -35,6 +35,7 @@ namespace api
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<IStorageRepository, StorageRepository>();
+            services.AddScoped<ICartRepository, CartRepository>();
             services.AddCors();
         }
 
