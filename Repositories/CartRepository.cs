@@ -20,7 +20,6 @@ namespace api.Repositories
         {
             if (_context != null)
             {
-                
                 var result= await _context.Cart.ToListAsync();
                 return result;
             }
