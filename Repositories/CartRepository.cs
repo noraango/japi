@@ -20,20 +20,41 @@ namespace api.Repositories
         {
             if (_context != null)
             {
-               
-                var cart= await _context.Cart.FirstOrDefaultAsync(x => x.UserId==userId);
-                var result= await _context.CartItem.AsQueryable().Where(x =>x.CartId ==cart.Id).ToListAsync();
+                var cart = await _context.Cart.FirstOrDefaultAsync(x => x.UserId == userId);
+                var result = await _context.CartItem.AsQueryable().Where(x => x.CartId == cart.Id).ToListAsync();
                 return result;
             }
             return null;
         }
-        public async Task<int> AddItemToCart(int productId, int cartId, int quantity)
+        public async Task<int> AddItemToCart(int productId, int userId, int quantity)
         {
-            return 0;
+            var cart = await _context.Cart.FirstOrDefaultAsync(x => x.UserId == userId);
+            var product = await _context.Product.FirstOrDefaultAsync(x => x.Id == productId);
+            if (quantity > product.Quantity)
+            {
+                return 0;
+            }
+            else
+            {
+                CartItem item = new CartItem();
+                item.CartId = cart.Id;
+                item.ProductId = product.Id;
+                item.Quantity = product.Quantity;
+                await _context.CartItem.AddAsync(item);
+                return await _context.SaveChangesAsync();
+            }
         }
         public async Task<int> DeleteItemFromCart(int productId, int cartId)
         {
-            return 0;
+            int result = 0;
+            var cartItems = _context.CartItem.AsQueryable().Where(x => x.CartId==cartId).AsQueryable();
+            var cartItem= await cartItems.FirstOrDefaultAsync(x => x.ProductId==productId);
+            if (cartItem != null)
+            {
+                _context.CartItem.Remove(cartItem);
+                result = await _context.SaveChangesAsync();
+            }
+            return result;
         }
     }
 }
