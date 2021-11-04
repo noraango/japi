@@ -50,7 +50,20 @@ namespace api.Repositories
         {
             if (_context != null)
             {
-                var item = await _context.Storage.FirstOrDefaultAsync(x => x.Id == data.Id);
+                var dbitem = await _context.Storage.FirstOrDefaultAsync(item => item.Id == data.Id);
+                if (dbitem != null)
+                {
+                    dbitem.Name = data.Name;
+                    dbitem.Square=data.Square;
+                    dbitem.ProvinceId=data.ProvinceId;
+                    dbitem.DistrictId = data.DistrictId;
+                    dbitem.VillageId=data.VillageId;
+                    dbitem.Address=data.Address;
+                    dbitem.Floor = data.Floor;
+                    dbitem.WardId=data.WardId;
+                   
+                    await _context.SaveChangesAsync();
+                }
             }
             return 0;
         }

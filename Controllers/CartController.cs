@@ -35,5 +35,33 @@ namespace api.Controllers
                 return BadRequest();
             }
         }
+         [HttpPost]
+        [Route("add/{productId}/{userId}/{quantity}")]
+        public async Task<IActionResult> AddItemToCart(int productId, int userId, int quantity)
+        {
+            try
+            {
+                var result = await _CartRepository.AddItemToCart(productId,userId,quantity);
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                return BadRequest();
+            }
+        }
+        [HttpDelete]
+        [Route("delete/{productId}/{cartId}")]
+        public async Task<IActionResult> DeleteItemFromCart(int productId, int cartId)
+        {
+            try
+            {
+                var result = await _CartRepository.DeleteItemFromCart(productId,cartId);
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                return BadRequest();
+            }
+        }
     }
 }
