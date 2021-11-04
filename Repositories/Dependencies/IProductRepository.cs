@@ -8,7 +8,7 @@ namespace api.Repositories.Dependencies
     {
         Task<int> Create(ProductModel item);
         Task<IEnumerable<ProductModel>> GetProducts(int quantity);
-        Task<IEnumerable<ProductModel>> Search(string querySearch, int currentPage, int pageSize);
+        Task<System.Object> Search(string querySearch, int currentPage, int pageSize);
         Task<IEnumerable<ProductStatus>> GetStatuses();
         Task<IEnumerable<ProductPackingMethod>> GetPackMethods();
         Task<IEnumerable<Origin>> GetOrigins();
