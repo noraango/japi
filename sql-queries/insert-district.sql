@@ -1,6 +1,7 @@
 ﻿drop table [LocationDistrict];
 CREATE TABLE [LocationDistrict](
-	[DistrictId] [varchar](20) NOT NULL PRIMARY KEY,
+[Id] int IDENTITY(1,1) PRIMARY KEY,
+	[DistrictId] [varchar](20) NOT NULL,
 	[Name] [nvarchar](200) NULL,
 	[ProvinceId] [varchar](20) NULL,
 );
