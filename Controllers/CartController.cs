@@ -9,7 +9,7 @@ namespace api.Controllers
 {
     [Route("Cart")]
     [ApiController]
-    public class CartController: ControllerBase
+    public class CartController : ControllerBase
     {
         private readonly ICartRepository _CartRepository;
 
@@ -28,6 +28,50 @@ namespace api.Controllers
                 {
                     return NotFound();
                 }
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                return BadRequest();
+            }
+        }
+        [HttpPost]
+        [Route("add/{productId}/{userId}/{quantity}")]
+        public async Task<IActionResult> AddItemToCart(int productId, int userId, int quantity)
+        {
+            try
+            {
+                var result = await _CartRepository.AddItemToCart(productId, userId, quantity);
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpPost]
+        [Route("update/{productId}/{userId}/{quantity}")]
+        public async Task<IActionResult> DeleteItemFromCart(int productId, int userId, int quantity)
+        {
+            try
+            {
+                var result = await _CartRepository.UpdateCartItemQuantity(productId, userId, quantity);
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpDelete]
+        [Route("delete/{productId}/{cartId}")]
+        public async Task<IActionResult> DeleteItemFromCart(int productId, int cartId)
+        {
+            try
+            {
+                var result = await _CartRepository.DeleteItemFromCart(productId, cartId);
                 return Ok(result);
             }
             catch (Exception e)

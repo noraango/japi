@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using api.Models.DBModels;
 using api.Repositories.Dependencies;
 using Microsoft.AspNetCore.Mvc;
 namespace api.Controllers
@@ -17,11 +18,12 @@ namespace api.Controllers
 
         [HttpPost]
         [Route("create")]
-        public async Task<IActionResult> Create()
+        public async Task<IActionResult> Create([FromForm] Storage storage)
         {
             try
             {
-                return Ok();
+                var result = await _StorageRepository.Create(storage);
+                return Ok(result);
             }
             catch (Exception)
             {
@@ -46,11 +48,12 @@ namespace api.Controllers
 
         [HttpPost]
         [Route("update")]
-        public async Task<IActionResult> Update()
+        public async Task<IActionResult> Update([FromForm] Storage storage)
         {
             try
             {
-                return Ok();
+                var result = await _StorageRepository.Update(storage);
+                return Ok(result);
             }
             catch (Exception)
             {
