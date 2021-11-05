@@ -45,15 +45,15 @@ namespace api.Repositories
             return null;
         }
 
-        public async Task<IEnumerable<orderModel>> GetProducts(int quantity)
+        public async Task<IEnumerable<ProductModel>> GetProducts(int quantity)
         {
             if (_context != null)
             {
-                var result = new List<orderModel>();
+                var result = new List<ProductModel>();
                 var source = await _context.Product.AsQueryable().Take(quantity).ToListAsync();
                 foreach (Product item in source)
                 {
-                    var model = new orderModel();
+                    var model = new ProductModel();
                     model.Id = item.Id;
                     model.Name = item.Name;
                     model.Quantity = item.Quantity;
@@ -70,7 +70,7 @@ namespace api.Repositories
         {
             if (_context != null)
             {
-                var list = new List<orderModel>();
+                var list = new List<ProductModel>();
 
                 var fullSource = _context.Product.AsQueryable().Where(x =>
                                 x.Name.ToLower().Contains(querySearch.ToLower())
@@ -81,7 +81,7 @@ namespace api.Repositories
 
                 foreach (Product item in source)
                 {
-                    var model = new orderModel();
+                    var model = new ProductModel();
                     model.Id = item.Id;
                     model.Code = item.Code;
                     model.Name = item.Name;
@@ -102,7 +102,7 @@ namespace api.Repositories
             return null;
         }
 
-        public async Task<int> Create(orderModel item)
+        public async Task<int> Create(ProductModel item)
         {
             try
             {

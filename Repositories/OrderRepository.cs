@@ -57,16 +57,16 @@ namespace api.Repositories
             }
         }
 
-        public async Task<IEnumerable<orderModel>> GetOrderItemsByOrderId(int orderId)
+        public async Task<IEnumerable<ProductModel>> GetOrderItemsByOrderId(int orderId)
         {
             if (_context != null)
             {
-                List<orderModel> result = new List<orderModel>();
+                List<ProductModel> result = new List<ProductModel>();
                 var order = await _context.Order.FirstOrDefaultAsync(x => x.Id == orderId);
                 var orderItems = await _context.OrderItem.AsQueryable().Where(x => x.OrderId == order.Id).ToListAsync();
                 foreach (OrderItem item in orderItems)
                 {
-                    orderModel model = new orderModel();
+                    ProductModel model = new ProductModel();
                     var product = await _context.Product.FirstOrDefaultAsync(x => x.Id == item.ProductId);
                     model.Id = product.Id;
                     model.Code = product.Code;
@@ -76,6 +76,8 @@ namespace api.Repositories
                     model.DisplayImageName = product.DisplayImageName;
                     var status = await _context.ProductStatus.FirstAsync(x => x.Id == product.ProductStatusId);
                     model.Status = status.Name;
+                    var packing = await _context.ProductPackingMethod.FirstOrDefaultAsync(x => x.Id == product.PackingMethodId);
+                    model.PackingMethod = packing.Name;
                     result.Add(model);
                 }
                 return result;

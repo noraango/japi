@@ -16,16 +16,16 @@ namespace api.Repositories
         {
             this._context = context;
         }
-        public async Task<IEnumerable<orderModel>> GetCart(int userId)
+        public async Task<IEnumerable<ProductModel>> GetCart(int userId)
         {
             if (_context != null)
             {
-                List<orderModel> result = new List<orderModel>();
+                List<ProductModel> result = new List<ProductModel>();
                 var cart = await _context.Cart.FirstOrDefaultAsync(x => x.UserId == userId);
                 var cartItems = await _context.CartItem.AsQueryable().Where(x => x.CartId == cart.Id).ToListAsync();
                 foreach (CartItem item in cartItems)
                 {
-                    orderModel model = new orderModel();
+                    ProductModel model = new ProductModel();
                     var product = await _context.Product.FirstOrDefaultAsync(x => x.Id == item.ProductId);
                     model.Id = product.Id;
                     model.Code = product.Code;

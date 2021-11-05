@@ -69,7 +69,7 @@ namespace api.Controllers
             }
         }
         [HttpGet]
-        [Route("getorderitem/{orderId}")]
+        [Route("getorderitems/{orderId}")]
         public async Task<IActionResult> GetOrderItemsByOrderId(int orderId)
         {
             try
