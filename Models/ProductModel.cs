@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Http;
 namespace api.Models
 {
-    public class ProductModel
+    public class orderModel
     {
         public int Id { get; set; }
         public string Code { get; set; }

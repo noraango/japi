@@ -10,7 +10,7 @@ namespace api.Controllers
 {
     [Route("Order")]
     [ApiController]
-    public class OrderController: ControllerBase
+    public class OrderController : ControllerBase
     {
         private readonly IOrderRepository _OrderRepository;
 
@@ -19,12 +19,30 @@ namespace api.Controllers
             this._OrderRepository = orderRepository;
         }
         [HttpGet]
-        [Route("getorder/{userId}")]
-        public async Task<IActionResult>  GetOrdersByUserId(int userId)
+        [Route("getorders/{userId}")]
+        public async Task<IActionResult> GetOrdersByUserId(int userId)
         {
             try
             {
                 var result = await _OrderRepository.GetOrdersByUserId(userId);
+                if (result == null)
+                {
+                    return NotFound();
+                }
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                return BadRequest();
+            }
+        }
+        [HttpGet]
+        [Route("getorder/{orderId}")]
+        public async Task<IActionResult> GetOrderByUserId(int orderId)
+        {
+            try
+            {
+                var result = await _OrderRepository.GetOrderByOrderId(orderId);
                 if (result == null)
                 {
                     return NotFound();
@@ -52,7 +70,7 @@ namespace api.Controllers
         }
         [HttpGet]
         [Route("getorderitem/{orderId}")]
-        public async Task<IActionResult>  GetOrderItemsByOrderId(int orderId)
+        public async Task<IActionResult> GetOrderItemsByOrderId(int orderId)
         {
             try
             {
@@ -82,6 +100,6 @@ namespace api.Controllers
                 return BadRequest();
             }
         }
-        
+
     }
 }

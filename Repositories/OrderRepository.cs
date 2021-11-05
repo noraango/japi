@@ -57,16 +57,16 @@ namespace api.Repositories
             }
         }
 
-        public async Task<IEnumerable<ProductModel>> GetOrderItemsByOrderId(int orderId)
+        public async Task<IEnumerable<orderModel>> GetOrderItemsByOrderId(int orderId)
         {
             if (_context != null)
             {
-                List<ProductModel> result = new List<ProductModel>();
+                List<orderModel> result = new List<orderModel>();
                 var order = await _context.Order.FirstOrDefaultAsync(x => x.Id == orderId);
                 var orderItems = await _context.OrderItem.AsQueryable().Where(x => x.OrderId == order.Id).ToListAsync();
                 foreach (OrderItem item in orderItems)
                 {
-                    ProductModel model = new ProductModel();
+                    orderModel model = new orderModel();
                     var product = await _context.Product.FirstOrDefaultAsync(x => x.Id == item.ProductId);
                     model.Id = product.Id;
                     model.Code = product.Code;
@@ -83,6 +83,29 @@ namespace api.Repositories
             return null;
         }
 
+        public async Task<OrderModel> GetOrderByOrderId(int orderId)
+        {
+            if (_context != null)
+            {
+                OrderModel result = new OrderModel();
+                var order = await _context.Order.FirstOrDefaultAsync(x => x.Id == orderId);
+                result.Id = order.Id;
+                result.UserId = order.UserId;
+                result.Address = order.Address;
+                result.DistrictId = order.DistrictId;
+                result.WardId = order.WardId;
+                result.EarliestDeliveryDate = order.EarliestDeliveryDate;
+                result.LatestDeliveryDate = order.LatestDeliveryDate;
+                result.ProvinceId = order.ProvinceId;
+                result.WeekendDelivery = order.WeekendDelivery;
+                result.ShipperId = order.ShipperId;
+                result.OrderStatusId = order.OrderStatusId;
+                var status = await _context.OrderStatus.FirstAsync(x => x.Id == order.OrderStatusId);
+                result.Status = status.Name;
+                return result;
+            }
+            return null;
+        }
         public async Task<IEnumerable<OrderModel>> GetOrdersByUserId(int userId)
         {
             if (_context != null)
@@ -103,6 +126,8 @@ namespace api.Repositories
                     model.WeekendDelivery = item.WeekendDelivery;
                     model.ShipperId = item.ShipperId;
                     model.OrderStatusId = item.OrderStatusId;
+                    var status = await _context.OrderStatus.FirstAsync(x => x.Id == item.OrderStatusId);
+                    model.Status = status.Name;
                     result.Add(model);
                 }
                 return result;

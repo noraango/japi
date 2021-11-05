@@ -79,7 +79,7 @@ namespace api.Controllers
 
         [HttpPost]
         [Route("create")]
-        public async Task<IActionResult> CreateProduct([FromForm] ProductModel productModel)
+        public async Task<IActionResult> CreateProduct([FromForm] orderModel productModel)
         {
             try
             {
