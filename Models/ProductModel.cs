@@ -21,5 +21,6 @@ namespace api.Models
         public string DisplayImageName { get; set; }
         public string Status { get; set; }
         public IFormFile DisplayImage { get; set; }
+        public int numberOfPage { get; set; }
     }
 }
