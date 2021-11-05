@@ -66,12 +66,19 @@ namespace api.Repositories
             return null;
         }
 
-        public async Task<IEnumerable<ProductModel>> Search(string querySearch, int currentPage, int pageSize)
+        public async Task<System.Object> Search(string querySearch, int currentPage, int pageSize)
         {
             if (_context != null)
             {
-                var result = new List<ProductModel>();
-                var source = await _context.Product.AsQueryable().Where(x => x.Name.ToLower().Contains(querySearch.ToLower())).Skip((currentPage - 1) * pageSize).Take(pageSize).OrderBy(x => x.Id).ToListAsync();
+                var list = new List<ProductModel>();
+
+                var fullSource = _context.Product.AsQueryable().Where(x =>
+                                x.Name.ToLower().Contains(querySearch.ToLower())
+                                || x.Code.ToLower().Contains(querySearch.ToLower())
+                                || x.Manufacturer.ToLower().Contains(querySearch.ToLower())
+                                || x.Brand.ToLower().Contains(querySearch.ToLower())).AsQueryable();
+                var source = await fullSource.Skip((currentPage - 1) * pageSize).Take(pageSize).OrderBy(x => x.Id).ToListAsync();
+
                 foreach (Product item in source)
                 {
                     var model = new ProductModel();
@@ -83,9 +90,14 @@ namespace api.Repositories
                     model.DisplayImageName = item.DisplayImageName;
                     var status = await _context.ProductStatus.FirstAsync(x => x.Id == item.ProductStatusId);
                     model.Status = status.Name;
-                    result.Add(model);
+                    list.Add(model);
                 }
-                return result;
+                int numberOfPage = (int)Math.Ceiling(fullSource.Count() / Convert.ToDouble(pageSize));
+                return new
+                {
+                    numberOfPage = numberOfPage,
+                    list = list,
+                };
             }
             return null;
         }

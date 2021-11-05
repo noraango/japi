@@ -124,12 +124,12 @@ namespace api.Controllers
                 }
                 int currentPage = CurrentPage != null ? (int)CurrentPage : 1;
                 int pageSize = PageSize != null ? (int)PageSize : 9;
-                var gameModelList = await _ProductRepository.Search(querySearch, currentPage, pageSize);
-                if (gameModelList == null)
+                var result = await _ProductRepository.Search(querySearch, currentPage, pageSize);
+                if (result == null)
                 {
                     return NotFound();
                 }
-                return Ok(gameModelList);
+                return Ok(result);
             }
             catch (Exception)
             {

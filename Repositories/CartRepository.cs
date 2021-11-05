@@ -97,16 +97,14 @@ namespace api.Repositories
             {
                 var cart = await _context.Cart.FirstOrDefaultAsync(x => x.UserId == userId);
                 var product = await _context.Product.FirstOrDefaultAsync(x => x.Id == productId);
+                var cartItem = await _context.CartItem.FirstOrDefaultAsync(x => x.ProductId == productId && x.CartId == cart.Id);
                 if (quantity > product.Quantity)
                 {
                     return 0;
                 }
                 else
                 {
-                    var cartItem = await _context.CartItem.FirstOrDefaultAsync(x => x.ProductId == productId);
-                    cartItem.CartId = cart.Id;
-                    cartItem.ProductId = product.Id;
-                    cartItem.Quantity = product.Quantity;
+                    cartItem.Quantity = quantity;
                     return await _context.SaveChangesAsync();
                 }
             }
