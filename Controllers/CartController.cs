@@ -66,12 +66,12 @@ namespace api.Controllers
         }
 
         [HttpDelete]
-        [Route("delete/{productId}/{cartId}")]
-        public async Task<IActionResult> DeleteItemFromCart(int productId, int cartId)
+        [Route("delete/{productId}/{userId}")]
+        public async Task<IActionResult> DeleteItemFromCart(int productId, int userId)
         {
             try
             {
-                var result = await _CartRepository.DeleteItemFromCart(productId, cartId);
+                var result = await _CartRepository.DeleteItemFromCart(productId, userId);
                 return Ok(result);
             }
             catch (Exception e)
