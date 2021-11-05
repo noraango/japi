@@ -93,6 +93,7 @@ namespace api.Repositories
 
         public async Task<int> UpdateCartItemQuantity(int productId, int userId, int quantity)
         {
+            var result = 0;
             if (_context != null)
             {
                 var cart = await _context.Cart.FirstOrDefaultAsync(x => x.UserId == userId);
@@ -105,10 +106,11 @@ namespace api.Repositories
                 else
                 {
                     cartItem.Quantity = quantity;
-                    return await _context.SaveChangesAsync();
+                    result = await _context.SaveChangesAsync();
+                    return result;
                 }
             }
-            return 0;
+            return result;
         }
     }
 }
