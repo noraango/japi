@@ -17,24 +17,108 @@ namespace api.Repositories
             this._context = context;
         }
 
-        public Task<int> Create(OrderModel model)
+        public async Task<int> Create(OrderModel model)
         {
-            throw new NotImplementedException();
+            try
+            {
+
+                if (_context != null)
+                {
+                    var item = new Order();
+                    item.UserId = model.UserId;
+                    item.WeekendDelivery = model.WeekendDelivery;
+                    item.EarliestDeliveryDate = model.EarliestDeliveryDate;
+                    item.LatestDeliveryDate = model.LatestDeliveryDate;
+                    item.Address = model.Address;
+                    item.WardId = model.WardId;
+                    item.ProvinceId = model.ProvinceId;
+                    item.DistrictId = model.DistrictId;
+                    item.OrderStatusId = model.OrderStatusId;
+                    item.ShipperId = model.ShipperId;
+                    await _context.Order.AddAsync(item);
+                    var order = await _context.Order.FirstOrDefaultAsync(x => x.UserId == model.UserId);
+                    var cart = await _context.Cart.FirstOrDefaultAsync(x => x.Id == model.UserId);
+                    var cartItems = await _context.CartItem.AsQueryable().Where(x => x.CartId == cart.Id).ToListAsync();
+                    foreach (CartItem cartItem in cartItems)
+                    {
+                        OrderItem orderItem = new OrderItem();
+                        orderItem.OrderId = order.Id;
+                        orderItem.ProductId = cartItem.ProductId;
+                        orderItem.Quantity = cartItem.Quantity;
+                        await _context.OrderItem.AddAsync(orderItem);
+                    }
+                    return await _context.SaveChangesAsync();
+                }
+                return 0;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
         }
 
-        public Task<IEnumerable<ProductModel>> GetOrderItemsByOrderId(int orderId)
+        public async Task<IEnumerable<ProductModel>> GetOrderItemsByOrderId(int orderId)
         {
-            throw new NotImplementedException();
+            if (_context != null)
+            {
+                List<ProductModel> result = new List<ProductModel>();
+                var order = await _context.Order.FirstOrDefaultAsync(x => x.Id == orderId);
+                var orderItems = await _context.OrderItem.AsQueryable().Where(x => x.OrderId == order.Id).ToListAsync();
+                foreach (OrderItem item in orderItems)
+                {
+                    ProductModel model = new ProductModel();
+                    var product = await _context.Product.FirstOrDefaultAsync(x => x.Id == item.ProductId);
+                    model.Id = product.Id;
+                    model.Code = product.Code;
+                    model.Name = product.Name;
+                    model.Quantity = item.Quantity;
+                    model.Price = product.Price;
+                    model.DisplayImageName = product.DisplayImageName;
+                    var status = await _context.ProductStatus.FirstAsync(x => x.Id == product.ProductStatusId);
+                    model.Status = status.Name;
+                    result.Add(model);
+                }
+                return result;
+            }
+            return null;
         }
 
-        public Task<IEnumerable<OrderModel>> GetOrdersByUserId(int userId)
+        public async Task<IEnumerable<OrderModel>> GetOrdersByUserId(int userId)
         {
-            throw new NotImplementedException();
+            if (_context != null)
+            {
+                var result = new List<OrderModel>();
+                var source = await _context.Order.AsQueryable().Where(x => x.UserId == userId).ToListAsync();
+                foreach (Order item in source)
+                {
+                    var model = new OrderModel();
+                    model.Id = item.Id;
+                    model.UserId = item.UserId;
+                    model.Address = item.Address;
+                    model.DistrictId = item.DistrictId;
+                    model.WardId = item.WardId;
+                    model.EarliestDeliveryDate = item.EarliestDeliveryDate;
+                    model.LatestDeliveryDate = item.LatestDeliveryDate;
+                    model.ProvinceId = item.ProvinceId;
+                    model.WeekendDelivery = item.WeekendDelivery;
+                    model.ShipperId = item.ShipperId;
+                    model.OrderStatusId = item.OrderStatusId;
+                    result.Add(model);
+                }
+                return result;
+            }
+            return null;
         }
 
-        public Task<int> Update(OrderModel model)
+        public async Task<int> Update(OrderModel model)
         {
-            throw new NotImplementedException();
+            var dbitem = await _context.Order.FirstOrDefaultAsync(item => item.OrderStatusId == model.Id);
+            if (dbitem != null)
+            {
+                dbitem.OrderStatusId = model.OrderStatusId;
+                return await _context.SaveChangesAsync();
+            }
+            return 0;
         }
     }
 }
