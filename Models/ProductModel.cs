@@ -15,6 +15,7 @@ namespace api.Models
         public string Description { get; set; }
         public string Brand { get; set; }
         public int? OriginId { get; set; }
+        public string Origin { get; set; }
         public int? PackingMethodId { get; set; }
         public string PackingMethod { get; set; }
         public int? ProductStatusId { get; set; }
@@ -22,6 +23,5 @@ namespace api.Models
         public string DisplayImageName { get; set; }
         public string Status { get; set; }
         public IFormFile DisplayImage { get; set; }
-        public int numberOfPage { get; set; }
     }
 }

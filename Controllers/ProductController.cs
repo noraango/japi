@@ -136,5 +136,23 @@ namespace api.Controllers
                 return BadRequest();
             }
         }
+        [HttpGet]
+        [Route("get/{id}")]
+        public async Task<IActionResult> Detail(int? id)
+        {
+            try
+            {
+                var result = await _ProductRepository.Detail(id ?? default(int));
+                if (result == null)
+                {
+                    return NotFound();
+                }
+                return Ok(result);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
     }
 }

@@ -106,7 +106,6 @@ namespace api.Repositories
         {
             try
             {
-
                 if (_context != null)
                 {
                     var product = new Product();
@@ -134,6 +133,35 @@ namespace api.Repositories
             {
                 return 0;
             }
+        }
+
+        public async Task<ProductModel> Detail(int productId)
+        {
+            if (_context != null)
+            {
+                var product = await _context.Product.FirstOrDefaultAsync(x => x.Id == productId);
+                ProductModel result = new ProductModel();
+                result.Id = product.Id;
+                result.Code = product.Code;
+                result.Name = product.Name;
+                result.Price = product.Price;
+                result.Size = product.Size;
+                result.Weight = product.Weight;
+                result.Quantity = product.Quantity;
+                result.Manufacturer = product.Manufacturer;
+                result.ShortDescription = product.ShortDescription;
+                result.Description = product.Description;
+                result.Brand = product.Brand;
+                result.OriginId = product.OriginId;
+                var origin = await _context.Origin.FirstOrDefaultAsync(x => x.Id == product.OriginId);
+                result.Origin = origin.Name;
+                result.PackingMethodId = product.PackingMethodId;
+                var packing = await _context.ProductPackingMethod.FirstOrDefaultAsync(x => x.Id == product.PackingMethodId);
+                result.PackingMethod = packing.Name;
+                result.DisplayImageName = product.DisplayImageName;
+                return result;
+            }
+            return null;
         }
     }
 }

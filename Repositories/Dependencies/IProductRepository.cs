@@ -12,5 +12,6 @@ namespace api.Repositories.Dependencies
         Task<IEnumerable<ProductStatus>> GetStatuses();
         Task<IEnumerable<ProductPackingMethod>> GetPackMethods();
         Task<IEnumerable<Origin>> GetOrigins();
+        Task<ProductModel> Detail(int productId);
     }
 }
