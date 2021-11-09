@@ -56,7 +56,6 @@ namespace api.Repositories
                     var model = new ProductModel();
                     model.Id = item.Id;
                     model.Name = item.Name;
-                    model.Quantity = item.Quantity;
                     model.Price = item.Price;
                     model.DisplayImageName = item.DisplayImageName;
                     result.Add(model);
@@ -85,7 +84,6 @@ namespace api.Repositories
                     model.Id = item.Id;
                     model.Code = item.Code;
                     model.Name = item.Name;
-                    model.Quantity = item.Quantity;
                     model.Price = item.Price;
                     model.DisplayImageName = item.DisplayImageName;
                     var status = await _context.ProductStatus.FirstAsync(x => x.Id == item.ProductStatusId);
@@ -114,7 +112,6 @@ namespace api.Repositories
                     product.Price = item.Price;
                     product.Size = item.Size;
                     product.Weight = item.Weight;
-                    product.Quantity = item.Quantity;
                     product.Manufacturer = item.Manufacturer;
                     product.ShortDescription = item.ShortDescription;
                     product.Description = item.Description;
@@ -122,7 +119,6 @@ namespace api.Repositories
                     product.OriginId = item.OriginId;
                     product.PackingMethodId = item.PackingMethodId;
                     product.ProductStatusId = item.ProductStatusId;
-                    product.StorageId = item.StorageId;
                     product.DisplayImageName = item.DisplayImageName;
                     await _context.Product.AddAsync(product);
                     return await _context.SaveChangesAsync();
@@ -147,7 +143,6 @@ namespace api.Repositories
                 result.Price = product.Price;
                 result.Size = product.Size;
                 result.Weight = product.Weight;
-                result.Quantity = product.Quantity;
                 result.Manufacturer = product.Manufacturer;
                 result.ShortDescription = product.ShortDescription;
                 result.Description = product.Description;

@@ -4,11 +4,11 @@ using api.Models.DBModels;
 using api.Models;
 namespace api.Repositories.Dependencies
 {
-    public interface IStorageRepository
+    public interface IStoreRepository
     {
-        Task<int> Create(Storage item);
-        Task<IEnumerable<Storage>> Read();
-        Task<int> Update(Storage data);
+        Task<int> Create(Store item);
+        Task<IEnumerable<Store>> Read();
+        Task<int> Update(Store data);
         Task<int> Delete(int id);
     }
 }

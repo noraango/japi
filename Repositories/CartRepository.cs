@@ -6,7 +6,6 @@ using api.Repositories.Dependencies;
 using api.Repositories.Data;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
-using System;
 namespace api.Repositories
 {
     public class CartRepository : ICartRepository
@@ -46,10 +45,14 @@ namespace api.Repositories
             if (_context != null)
             {
                 var cart = await _context.Cart.FirstOrDefaultAsync(x => x.UserId == userId);
-                var product = await _context.Product.FirstOrDefaultAsync(x => x.Id == productId);
                 var cartItem = await _context.CartItem.FirstOrDefaultAsync(x => x.ProductId == productId && x.CartId == cart.Id);
-
-                if (quantity > product.Quantity)
+                var storeProducts = await _context.StoreProduct.Where(x => x.ProductId == productId).ToListAsync();
+                var productQuantity = 0;
+                foreach (var item in storeProducts)
+                {
+                    productQuantity += item.Quantity ?? default(int);
+                }
+                if (quantity > productQuantity)
                 {
                     return 0;
                 }
@@ -57,12 +60,12 @@ namespace api.Repositories
                 {
                     CartItem item = new CartItem();
                     item.CartId = cart.Id;
-                    item.ProductId = product.Id;
+                    item.ProductId = productId;
                     item.Quantity = quantity;
                     await _context.CartItem.AddAsync(item);
                     return await _context.SaveChangesAsync();
                 }
-                else if (cartItem.Quantity + quantity > product.Quantity)
+                else if (cartItem.Quantity + quantity > productQuantity)
                 {
                     return 0;
                 }
@@ -97,9 +100,14 @@ namespace api.Repositories
             if (_context != null)
             {
                 var cart = await _context.Cart.FirstOrDefaultAsync(x => x.UserId == userId);
-                var product = await _context.Product.FirstOrDefaultAsync(x => x.Id == productId);
                 var cartItem = await _context.CartItem.FirstOrDefaultAsync(x => x.ProductId == productId && x.CartId == cart.Id);
-                if (quantity > product.Quantity)
+                var storeProducts = await _context.StoreProduct.Where(x => x.ProductId == productId).ToListAsync();
+                var productQuantity = 0;
+                foreach (var item in storeProducts)
+                {
+                    productQuantity += item.Quantity ?? default(int);
+                }
+                if (quantity > productQuantity)
                 {
                     return 0;
                 }

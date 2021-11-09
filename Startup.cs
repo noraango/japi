@@ -34,7 +34,7 @@ namespace api
             });
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<IProductRepository, ProductRepository>();
-            services.AddScoped<IStorageRepository, StorageRepository>();
+            services.AddScoped<IStoreRepository, StoreRepository>();
             services.AddScoped<ICartRepository, CartRepository>();
             services.AddScoped<ILocationRepository, LocationRepository>();
             services.AddScoped<IOrderRepository, OrderRepository>();

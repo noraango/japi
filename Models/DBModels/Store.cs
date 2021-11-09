@@ -1,6 +1,6 @@
 namespace api.Models.DBModels
 {
-    public class Storage
+    public class Store
     {
         public int? Id { get; set; }
         public string Name { get; set; }

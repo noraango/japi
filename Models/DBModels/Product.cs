@@ -6,9 +6,8 @@ namespace api.Models.DBModels
         public string Code { get; set; }
         public string Name { get; set; }
         public decimal? Price { get; set; }
-        public double? Size { get; set; }
+        public string Size { get; set; }
         public double? Weight { get; set; }
-        public int? Quantity { get; set; }
         public string Manufacturer { get; set; }
         public string ShortDescription { get; set; }
         public string Description { get; set; }
@@ -17,6 +16,5 @@ namespace api.Models.DBModels
         public int? PackingMethodId { get; set; }
         public int? ProductStatusId { get; set; }
         public string DisplayImageName { get; set; }
-        public int? StorageId { get; set; }
     }
 }

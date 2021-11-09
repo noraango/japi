@@ -7,20 +7,20 @@ using api.Models.DBModels;
 using System.Linq;
 namespace api.Repositories
 {
-    public class StorageRepository : IStorageRepository
+    public class StoreRepository : IStoreRepository
     {
         private readonly Context _context;
 
-        public StorageRepository(Context context)
+        public StoreRepository(Context context)
         {
             this._context = context;
         }
 
-        public async Task<int> Create(Storage item)
+        public async Task<int> Create(Store item)
         {
             if (_context != null)
             {
-                await _context.Storage.AddAsync(item);
+                await _context.Store.AddAsync(item);
                 return await _context.SaveChangesAsync();
             }
             return 0;
@@ -30,27 +30,27 @@ namespace api.Repositories
         {
             if (_context != null)
             {
-                var item = await _context.Storage.FirstOrDefaultAsync(x => x.Id == id);
-                _context.Storage.Remove(item);
+                var item = await _context.Store.FirstOrDefaultAsync(x => x.Id == id);
+                _context.Store.Remove(item);
                 return await _context.SaveChangesAsync();
             }
             return 0;
         }
 
-        public async Task<IEnumerable<Storage>> Read()
+        public async Task<IEnumerable<Store>> Read()
         {
             if (_context != null)
             {
-                return await _context.Storage.ToListAsync();
+                return await _context.Store.ToListAsync();
             }
             return null;
         }
 
-        public async Task<int> Update(Storage data)
+        public async Task<int> Update(Store data)
         {
             if (_context != null)
             {
-                var dbitem = await _context.Storage.FirstOrDefaultAsync(item => item.Id == data.Id);
+                var dbitem = await _context.Store.FirstOrDefaultAsync(item => item.Id == data.Id);
                 if (dbitem != null)
                 {
                     dbitem.Name = data.Name;

@@ -5,20 +5,20 @@ using api.Repositories.Dependencies;
 using Microsoft.AspNetCore.Mvc;
 namespace api.Controllers
 {
-    [Route("Storage")]
+    [Route("Store")]
     [ApiController]
-    public class StorageController : ControllerBase
+    public class Store : ControllerBase
     {
-        private readonly IStorageRepository _StorageRepository;
+        private readonly IStoreRepository _StorageRepository;
 
-        public StorageController(IStorageRepository storageRepository)
+        public Store(IStoreRepository storageRepository)
         {
             _StorageRepository = storageRepository;
         }
 
         [HttpPost]
         [Route("create")]
-        public async Task<IActionResult> Create([FromForm] Storage storage)
+        public async Task<IActionResult> Create([FromForm] Models.DBModels.Store storage)
         {
             try
             {
@@ -48,7 +48,7 @@ namespace api.Controllers
 
         [HttpPost]
         [Route("update")]
-        public async Task<IActionResult> Update([FromForm] Storage storage)
+        public async Task<IActionResult> Update([FromForm] Models.DBModels.Store storage)
         {
             try
             {

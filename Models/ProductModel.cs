@@ -7,7 +7,7 @@ namespace api.Models
         public string Code { get; set; }
         public string Name { get; set; }
         public decimal? Price { get; set; }
-        public double? Size { get; set; }
+        public string Size { get; set; }
         public double? Weight { get; set; }
         public int? Quantity { get; set; }
         public string Manufacturer { get; set; }
