@@ -4,6 +4,8 @@ using api.Repositories.Dependencies;
 using Microsoft.AspNetCore.Mvc;
 using api.Models;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using System.Collections.Generic;
 using api.Configs;
 namespace api.Controllers
 {
@@ -83,7 +85,14 @@ namespace api.Controllers
         {
             try
             {
+                var listImages = Request.Form.Files;
+                List<string> imageNames = new List<string>();
+                for (int i = 1; i < listImages.Count; i++)
+                {
+                    imageNames.Add(await FileHandler.SaveImage(listImages[i], _HostEnvironment.ContentRootPath));
+                }
                 productModel.DisplayImageName = await FileHandler.SaveImage(productModel.DisplayImage, _HostEnvironment.ContentRootPath);
+                productModel.imageNames = imageNames;
                 var result = await _ProductRepository.Create(productModel);
                 return Ok(result);
             }
@@ -143,6 +152,26 @@ namespace api.Controllers
             try
             {
                 var result = await _ProductRepository.Detail(id ?? default(int));
+                if (result == null)
+                {
+                    return NotFound();
+                }
+                return Ok(result);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+        [HttpGet]
+        [Route("comments")]
+        public async Task<IActionResult> Comments(int? id, int? CurrentPage, int? PageSize)
+        {
+            try
+            {
+                int currentPage = CurrentPage != null ? (int)CurrentPage : 1;
+                int pageSize = PageSize != null ? (int)PageSize : 9;
+                var result = await _ProductRepository.getComments(id ?? default(int), currentPage, pageSize);
                 if (result == null)
                 {
                     return NotFound();

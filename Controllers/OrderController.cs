@@ -36,24 +36,6 @@ namespace api.Controllers
                 return BadRequest();
             }
         }
-        [HttpGet]
-        [Route("getorder/{orderId}")]
-        public async Task<IActionResult> GetOrderByUserId(int orderId)
-        {
-            try
-            {
-                var result = await _OrderRepository.GetOrderByOrderId(orderId);
-                if (result == null)
-                {
-                    return NotFound();
-                }
-                return Ok(result);
-            }
-            catch (Exception e)
-            {
-                return BadRequest();
-            }
-        }
         [HttpPost]
         [Route("create")]
         public async Task<IActionResult> Create([FromForm] OrderModel model)

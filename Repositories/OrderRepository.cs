@@ -85,29 +85,6 @@ namespace api.Repositories
             return null;
         }
 
-        public async Task<OrderModel> GetOrderByOrderId(int orderId)
-        {
-            if (_context != null)
-            {
-                OrderModel result = new OrderModel();
-                var order = await _context.Order.FirstOrDefaultAsync(x => x.Id == orderId);
-                result.Id = order.Id;
-                result.UserId = order.UserId;
-                result.Address = order.Address;
-                result.DistrictId = order.DistrictId;
-                result.WardId = order.WardId;
-                result.EarliestDeliveryDate = order.EarliestDeliveryDate;
-                result.LatestDeliveryDate = order.LatestDeliveryDate;
-                result.ProvinceId = order.ProvinceId;
-                result.WeekendDelivery = order.WeekendDelivery;
-                result.ShipperId = order.ShipperId;
-                result.OrderStatusId = order.OrderStatusId;
-                var status = await _context.OrderStatus.FirstAsync(x => x.Id == order.OrderStatusId);
-                result.Status = status.Name;
-                return result;
-            }
-            return null;
-        }
         public async Task<IEnumerable<OrderModel>> GetOrdersByUserId(int userId)
         {
             if (_context != null)
@@ -120,11 +97,17 @@ namespace api.Repositories
                     model.Id = item.Id;
                     model.UserId = item.UserId;
                     model.Address = item.Address;
-                    model.DistrictId = item.DistrictId;
+                    var ward = await _context.LocationWard.FirstOrDefaultAsync(x => x.WardId.Equals(item.WardId));
                     model.WardId = item.WardId;
+                    model.Ward = ward.Name;
+                    var district = await _context.LocationDistrict.FirstOrDefaultAsync(x => x.DistrictId.Equals(item.DistrictId));
+                    model.DistrictId = item.DistrictId;
+                    model.District = district.Name;
+                    var province = await _context.LocationProvince.FirstOrDefaultAsync(x => x.ProvinceId.Equals(item.ProvinceId));
+                    model.ProvinceId = item.ProvinceId;
+                    model.Province = province.Name;
                     model.EarliestDeliveryDate = item.EarliestDeliveryDate;
                     model.LatestDeliveryDate = item.LatestDeliveryDate;
-                    model.ProvinceId = item.ProvinceId;
                     model.WeekendDelivery = item.WeekendDelivery;
                     model.ShipperId = item.ShipperId;
                     model.OrderStatusId = item.OrderStatusId;

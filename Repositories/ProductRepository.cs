@@ -106,6 +106,11 @@ namespace api.Repositories
             {
                 if (_context != null)
                 {
+                    var pp = await _context.Product.FirstOrDefaultAsync(x => x.Code.Equals(item.Code));
+                    if (pp != null)
+                    {
+                        return -1;
+                    }
                     var product = new Product();
                     product.Code = item.Code;
                     product.Name = item.Name;
@@ -121,11 +126,20 @@ namespace api.Repositories
                     product.ProductStatusId = item.ProductStatusId;
                     product.DisplayImageName = item.DisplayImageName;
                     await _context.Product.AddAsync(product);
+                    await _context.SaveChangesAsync();
+                    var p = await _context.Product.FirstOrDefaultAsync(x => x.Code.Equals(item.Code));
+                    foreach (var imageName in item.imageNames)
+                    {
+                        ProductImage productImage = new ProductImage();
+                        productImage.Name = imageName;
+                        productImage.ProductId = p.Id;
+                        await _context.ProductImage.AddAsync(productImage);
+                    }
                     return await _context.SaveChangesAsync();
                 }
                 return 0;
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 return 0;
             }
@@ -148,13 +162,48 @@ namespace api.Repositories
                 result.Description = product.Description;
                 result.Brand = product.Brand;
                 result.OriginId = product.OriginId;
+                result.ProductStatusId = product.ProductStatusId;
+                var status = await _context.ProductStatus.FirstOrDefaultAsync(x => x.Id == product.ProductStatusId);
+                result.Status = status.Name;
                 var origin = await _context.Origin.FirstOrDefaultAsync(x => x.Id == product.OriginId);
                 result.Origin = origin.Name;
                 result.PackingMethodId = product.PackingMethodId;
                 var packing = await _context.ProductPackingMethod.FirstOrDefaultAsync(x => x.Id == product.PackingMethodId);
                 result.PackingMethod = packing.Name;
                 result.DisplayImageName = product.DisplayImageName;
+                var ratings = await _context.ProductRating.AsQueryable().Where(x => x.ProductId == productId).Select(x => x.Rating).ToListAsync();
+                result.rating = ratings.Average();
+                List<string> imageNames = new List<string>();
+                var productImages = await _context.ProductImage.AsQueryable().Where(x => x.ProductId == product.Id).ToListAsync();
+                foreach (var item in productImages)
+                {
+                    imageNames.Add(item.Name);
+                }
+                result.imageNames = imageNames;
                 return result;
+            }
+            return null;
+        }
+
+        public async Task<System.Object> getComments(int productId, int currentPage, int pageSize)
+        {
+            if (_context != null)
+            {
+                var comments = await _context.ProductRating.AsQueryable().Where(x => x.ProductId == productId).Join(_context.User, x => x.UserId, y => y.UserId, (x, y) => new
+                {
+                    Id = x.Id,
+                    ProductId = x.ProductId,
+                    Rating = x.Rating,
+                    RateTime = x.RateTime,
+                    Comment = x.Comment,
+                    FirstName = y.FirstName,
+                    MiddleName = y.MiddleName,
+                    LastName = y.LastName,
+                }).Skip((currentPage - 1) * pageSize).Take(pageSize).OrderBy(x => x.RateTime).ToListAsync();
+                return new
+                {
+                    comments = comments
+                };
             }
             return null;
         }

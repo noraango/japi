@@ -38,6 +38,7 @@ namespace api
             services.AddScoped<ICartRepository, CartRepository>();
             services.AddScoped<ILocationRepository, LocationRepository>();
             services.AddScoped<IOrderRepository, OrderRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
             services.AddCors();
         }
 

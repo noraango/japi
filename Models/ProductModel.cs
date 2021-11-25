@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Http;
+using System.Collections.Generic;
 namespace api.Models
 {
     public class ProductModel
@@ -20,8 +21,10 @@ namespace api.Models
         public string PackingMethod { get; set; }
         public int? ProductStatusId { get; set; }
         public int? StorageId { get; set; }
-        public string DisplayImageName { get; set; }
         public string Status { get; set; }
+        public string DisplayImageName { get; set; }
+        public List<string> imageNames { get; set; }
         public IFormFile DisplayImage { get; set; }
+        public double? rating { get; set; }
     }
 }

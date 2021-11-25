@@ -8,7 +8,6 @@ namespace api.Repositories.Dependencies
     {
         Task<int> Create(OrderModel model);
         Task<IEnumerable<OrderModel>> GetOrdersByUserId(int userId);
-        Task<OrderModel> GetOrderByOrderId(int orerId);
         Task<IEnumerable<ProductModel>> GetOrderItemsByOrderId(int orderId);
         Task<int> Update(OrderModel model);
     }

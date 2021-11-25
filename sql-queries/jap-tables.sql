@@ -260,28 +260,28 @@ CREATE TABLE [User] (
   [UserRoleId] int,
   [EncodedPassword] varchar(500),
   [FirstName] nvarchar(50),
+  [MiddleName] nvarchar(50),
   [LastName] nvarchar(50),
   [Phone] varchar(10),
   [Email] varchar(100),
   [Address] nvarchar(500),
   [AvatarURL] varchar(200),
-  [VillageId] varchar(20),
   [WardId] varchar(20),
   [DistrictId] varchar(20),
   [ProvinceId] varchar(20),
 );
 
-insert into [User](UserRoleId,EncodedPassword,FirstName,LastName,Phone,Email,[Address],AvatarURL,VillageId,WardId,DistrictId,ProvinceId) values
-(1,'123','Ngo','Duy','096359548','duy123@gmail.com','PhuTho','https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-user-vector-avatar-png-image_1541962.jpg',null,null,null,null),
-(1,'123','Ngo','Anh','086522454','anh123@gmail.com','PhuTho','https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-user-vector-avatar-png-image_1541962.jpg',null,null,null,null),
-(1,'123','Do','Tung','0763845','tung123@gmail.com','PhuTho','https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-user-vector-avatar-png-image_1541962.jpg',null,null,null,null),
-(1,'123','Nguyen','Dat','066354845','tung123@gmail.com','PhuTho','https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-user-vector-avatar-png-image_1541962.jpg',null,null,null,null),
-(1,'123','Nguyen','Khanh','056359548','khanh123@gmail.com','PhuTho','https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-user-vector-avatar-png-image_1541962.jpg',null,null,null,null),
-(2,'123','Nguyen','Van','046359548','nguyenvan23@gmail.com','PhuTho','https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-user-vector-avatar-png-image_1541962.jpg',null,null,null,null),
-(3,'123','Hoang','An','036359548','hoangan123@gmail.com','PhuTho','https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-user-vector-avatar-png-image_1541962.jpg',null,null,null,null),
-(4,'123','Chu','Nam','026359548','chunam23@gmail.com','PhuTho','https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-user-vector-avatar-png-image_1541962.jpg',null,null,null,null);
+insert into [User](UserRoleId,EncodedPassword,FirstName,MiddleName,LastName,Phone,Email,[Address],AvatarURL,WardId,DistrictId,ProvinceId) values 
+(1,'123',N'Ngô',N'Thế',N'Anh','0357467491','timer217@gmail.com','Sơn La','https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-user-vector-avatar-png-image_1541962.jpg','00625','019HH','01TTT'),
+(1,'123','Ngo',N'Quang','Anh','086522454','anh123@gmail.com','PhuTho','https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-user-vector-avatar-png-image_1541962.jpg','00625','019HH','01TTT'),
+(1,'123','Do',N'Quang','Tung','0763845','tung123@gmail.com','PhuTho','https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-user-vector-avatar-png-image_1541962.jpg','00625','019HH','01TTT'),
+(1,'123','Nguyen',N'Quang','Dat','066354845','tung123@gmail.com','PhuTho','https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-user-vector-avatar-png-image_1541962.jpg','00625','019HH','01TTT'),
+(1,'123','Nguyen',N'Quang','Khanh','056359548','khanh123@gmail.com','PhuTho','https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-user-vector-avatar-png-image_1541962.jpg','00625','019HH','01TTT'),
+(2,'123','Nguyen',N'Quang','Van','046359548','nguyenvan23@gmail.com','PhuTho','https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-user-vector-avatar-png-image_1541962.jpg','00625','019HH','01TTT'),
+(3,'123','Hoang',N'Quang','An','036359548','hoangan123@gmail.com','PhuTho','https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-user-vector-avatar-png-image_1541962.jpg','00625','019HH','01TTT'),
+(4,'123','Chu',N'Quang','Nam','026359548','chunam23@gmail.com','PhuTho','https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-user-vector-avatar-png-image_1541962.jpg','00625','019HH','01TTT');
 
---select * from [User]
+select * from [User]
 
 
 
@@ -415,3 +415,38 @@ insert into [Order](UserId,WeekendDelivery,EarliestDeliveryDate,LatestDeliveryDa
 (4,'False','2021-12-05','2021-12-01',N'số 12, ngõ 23, đường Lê Đức Thắn/g','00625','019HH','01TTT',4,5);
 
 select * from [Order]
+
+
+--Product Rating
+drop table [ProductRating]
+CREATE TABLE [ProductRating] (
+  [Id] int IDENTITY(1,1) PRIMARY KEY,
+  [ProductId] int,
+  [Rating] int,
+  [RateTime] datetime,
+  [Comment] nvarchar(1000),
+  [UserId] int
+);
+insert into [ProductRating](ProductId,Rating,RateTime,Comment,UserId) values 
+(1,3,'01-08-2000',N'Tuyệt vời',1),
+(1,4,'01-30-2000',N'Tuyệt vời',1),
+(1,3,'01-08-2000',N'Tuyệt vời',1),
+(1,5,'01-08-2000',N'Tuyệt vời',1),
+(1,3,'01-08-2000',N'Tuyệt vời',1),
+(1,4,'01-08-2000',N'Tuyệt vời',1),
+(1,5,'01-08-2000',N'Tuyệt vời',1),
+(1,2,'01-08-2000',N'Tuyệt vời',1),
+(2,4,'01-08-2000',N'Tuyệt vời',1),
+(2,5,'01-08-2000',N'Tuyệt vời',1),
+(2,4,'01-08-2000',N'Tuyệt vời',1),
+(2,3,'01-08-2000',N'Tuyệt vời',1),
+(2,4,'01-08-2000',N'Tuyệt vời',1),
+(2,2,'01-08-2000',N'Tuyệt vời',1),
+(2,4,'01-08-2000',N'Tuyệt vời',1),
+(2,5,'01-08-2000',N'Tuyệt vời',1),
+(2,2,'01-08-2000',N'Tuyệt vời',1),
+(2,4,'01-08-2000',N'Tuyệt vời',1),
+(2,5,'01-08-2000',N'Tuyệt vời',1),
+(2,2,'01-08-2000',N'Tuyệt vời',2),
+(2,4,'01-08-2000',N'Tuyệt vời',2);
+select pr.*, (u.LastName + u.FirstName) as UserName from [ProductRating] pr left join [User] u on u.UserId = pr.UserId where pr.ProductId = 2;

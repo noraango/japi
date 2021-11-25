@@ -28,6 +28,6 @@ namespace api.Repositories.Data
         public DbSet<api.Models.DBModels.ShippingCompany> ShippingCompany { get; set; }
         public DbSet<api.Models.DBModels.User> User { get; set; }
         public DbSet<api.Models.DBModels.UserRole> UserRole { get; set; }
-
+        public DbSet<api.Models.DBModels.ProductRating> ProductRating { get; set; }
     }
 }
