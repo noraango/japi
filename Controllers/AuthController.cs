@@ -20,11 +20,11 @@ namespace api.Controllers
 
         [HttpPost]
         [Route("login")]
-        public async Task<IActionResult> Login(string phone, string password)
+        public async Task<IActionResult> Login(string username, string password)
         {
             try
             {
-                var result = await _UserRepository.Login(phone, password);
+                var result = await _UserRepository.Login(username, password);
                 return Ok(result);
             }
             catch (Exception e)
@@ -39,7 +39,24 @@ namespace api.Controllers
         {
             try
             {
-                return Ok();
+                if (user.Email == null || user.Email == "")
+                {
+                    return Ok(new
+                    {
+                        status = false,
+                        message = "Email must not be empty"
+                    });
+                }
+                if (user.EncodedPassword == null || user.EncodedPassword == "")
+                {
+                    return Ok(new
+                    {
+                        status = false,
+                        message = "Password must not be empty"
+                    });
+                }   
+                var result = await _UserRepository.Register(user);
+                return Ok(result);
             }
             catch (Exception e)
             {

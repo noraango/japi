@@ -11,7 +11,7 @@ namespace api.Models.DBModels
         public string Phone { get; set; }
         public string Email { get; set; }
         public string Address { get; set; }
-        public string AvatarURL { get; set; }
+        public string AvatarFilename { get; set; }
         public string WardId { get; set; }
         public string DistrictId { get; set; }
         public string ProvinceId { get; set; }

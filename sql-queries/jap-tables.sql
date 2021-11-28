@@ -247,9 +247,10 @@ CREATE TABLE [UserRole] (
 insert into [UserRole](Code,[Name]) values
 ('U1','Admin'),
 ('U2','Seller'),
-('U3','Staff');
+('U3','Staff'),
+('U4','Customer');
 
-/*select* from [User.Role];*/
+select* from [UserRole];
 
 /*tạo table User*/
 
@@ -265,21 +266,21 @@ CREATE TABLE [User] (
   [Phone] varchar(10),
   [Email] varchar(100),
   [Address] nvarchar(500),
-  [AvatarURL] varchar(200),
+  [AvatarFilename] varchar(200),
   [WardId] varchar(20),
   [DistrictId] varchar(20),
   [ProvinceId] varchar(20),
 );
 
-insert into [User](UserRoleId,EncodedPassword,FirstName,MiddleName,LastName,Phone,Email,[Address],AvatarURL,WardId,DistrictId,ProvinceId) values 
-(1,'123',N'Ngô',N'Thế',N'Anh','0357467491','timer217@gmail.com','Sơn La','https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-user-vector-avatar-png-image_1541962.jpg','00625','019HH','01TTT'),
-(1,'123','Ngo',N'Quang','Anh','086522454','anh123@gmail.com','PhuTho','https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-user-vector-avatar-png-image_1541962.jpg','00625','019HH','01TTT'),
-(1,'123','Do',N'Quang','Tung','0763845','tung123@gmail.com','PhuTho','https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-user-vector-avatar-png-image_1541962.jpg','00625','019HH','01TTT'),
-(1,'123','Nguyen',N'Quang','Dat','066354845','tung123@gmail.com','PhuTho','https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-user-vector-avatar-png-image_1541962.jpg','00625','019HH','01TTT'),
-(1,'123','Nguyen',N'Quang','Khanh','056359548','khanh123@gmail.com','PhuTho','https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-user-vector-avatar-png-image_1541962.jpg','00625','019HH','01TTT'),
-(2,'123','Nguyen',N'Quang','Van','046359548','nguyenvan23@gmail.com','PhuTho','https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-user-vector-avatar-png-image_1541962.jpg','00625','019HH','01TTT'),
-(3,'123','Hoang',N'Quang','An','036359548','hoangan123@gmail.com','PhuTho','https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-user-vector-avatar-png-image_1541962.jpg','00625','019HH','01TTT'),
-(4,'123','Chu',N'Quang','Nam','026359548','chunam23@gmail.com','PhuTho','https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-user-vector-avatar-png-image_1541962.jpg','00625','019HH','01TTT');
+insert into [User](UserRoleId,EncodedPassword,LastName,MiddleName,FirstName,Phone,Email,[Address],AvatarFilename,WardId,DistrictId,ProvinceId) values 
+(1,'123',N'Ngô',N'Thế',N'Anh','0357467491','timer217@gmail.com','Sơn La','avatar.jpg','00625','019HH','01TTT'),
+(1,'123','Ngo',N'Quang','Anh','086522454','anh123@gmail.com','PhuTho','avatar.jpg','00625','019HH','01TTT'),
+(1,'123','Do',N'Quang','Tung','0763845','tung123@gmail.com','PhuTho','avatar.jpg','00625','019HH','01TTT'),
+(1,'123','Nguyen',N'Quang','Dat','066354845','tung123@gmail.com','PhuTho','avatar.jpg','00625','019HH','01TTT'),
+(1,'123','Nguyen',N'Quang','Khanh','056359548','khanh123@gmail.com','PhuTho','avatar.jpg','00625','019HH','01TTT'),
+(2,'123','Nguyen',N'Quang','Van','046359548','nguyenvan23@gmail.com','PhuTho','avatar.jpg','00625','019HH','01TTT'),
+(3,'123','Hoang',N'Quang','An','036359548','hoangan123@gmail.com','PhuTho','avatar.jpg','00625','019HH','01TTT'),
+(4,'123','Chu',N'Quang','Nam','026359548','chunam23@gmail.com','PhuTho','avatar.jpg','00625','019HH','01TTT');
 
 select * from [User]
 

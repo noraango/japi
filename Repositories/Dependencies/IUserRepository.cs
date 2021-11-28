@@ -5,8 +5,8 @@ namespace api.Repositories.Dependencies
 {
     public interface IUserRepository
     {
-        Task<object> Login(string phone, string password);
-        Task<int> Register(User data);
+        Task<object> Login(string username, string password);
+        Task<object> Register(User data);
         Task<int> Forget(int id);
     }
 }
