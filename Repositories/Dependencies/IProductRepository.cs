@@ -14,5 +14,6 @@ namespace api.Repositories.Dependencies
         Task<IEnumerable<Origin>> GetOrigins();
         Task<ProductModel> Detail(int productId);
         Task<System.Object> getComments(int productId, int currentPage, int pageSize);
+        Task<System.Object> GetProductsByCategory(int categoryId, int currentPage, int pageSize);
     }
 }
