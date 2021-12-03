@@ -1,4 +1,6 @@
 using System;
+using api.Models.DBModels;
+
 namespace api.Models
 {
     public class OrderModel
@@ -19,5 +21,12 @@ namespace api.Models
         public int? ShipperId { get; set; }
         public string Status { get; set; }
 
+    }
+
+    public class shipperViewOrder{
+         public User user  { get; set; }
+         public Order order  { get; set; }
+         public string Province {get;set;}
+        public string District {get;set;}
     }
 }

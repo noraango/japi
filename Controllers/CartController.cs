@@ -42,7 +42,7 @@ namespace api.Controllers
             try
             {
                 var result = await _CartRepository.AddItemToCart(productId, userId, quantity);
-                return Ok(result);
+                return Ok(result);  
             }
             catch (Exception e)
             {

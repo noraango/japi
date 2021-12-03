@@ -10,5 +10,19 @@ namespace api.Repositories.Dependencies
         Task<IEnumerable<OrderModel>> GetOrdersByUserId(int userId);
         Task<IEnumerable<ProductModel>> GetOrderItemsByOrderId(int orderId);
         Task<int> Update(OrderModel model);
+
+        Task<System.Object> GetOrderInLocation(int userId, int page, int size);
+        Task<System.Object> GetMoreOrder(int userId, int page, int size);
+        Task<System.Object> ReceiveOrder(int userId, int orderId);
+        Task<System.Object> UpdateOrderStatus(Order order);
+        Task<System.Object> ShipperHistoty(int userId, int page, int size);
+        Task<System.Object> GetProductItem(int orderId);
+        Task<System.Object> CustomerCancel(Order order);
+
+        Task<System.Object> ShipperCancel(Order order);
+
+        Task<System.Object> ShopCancel(Order order);
+
+         Task<System.Object> ViewOrder(Order order);
     }
 }

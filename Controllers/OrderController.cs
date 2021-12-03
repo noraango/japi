@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 using api.Models;
 using Microsoft.AspNetCore.Hosting;
 using api.Configs;
+using MailKit.Net.Smtp;
+using MimeKit;
 
 namespace api.Controllers
 {
@@ -78,6 +80,120 @@ namespace api.Controllers
                 return Ok(result);
             }
             catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpGet]
+        [Route("GetOrder")]
+        public async Task<IActionResult> GetOrderForShipper(int userId, int filterType, int page, int size)
+        {
+            try
+            {
+                if (filterType == 1)
+                {
+                    var result = await _OrderRepository.GetOrderInLocation(userId, page, size);
+                    return Ok(result);
+                }
+                else
+                {
+                    var result = await _OrderRepository.GetMoreOrder(userId, page, size);
+                    return Ok(result);
+                }
+            }
+            catch (Exception e)
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpGet]
+        [Route("GetHistory")]
+        public async Task<IActionResult> GetHistory(int userId, int page, int size)
+        {
+            try
+            {
+                var result = await _OrderRepository.ShipperHistoty(userId, page, size);
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpGet]
+        [Route("ReceiveOrder")]
+        public async Task<IActionResult> ReceiveOrder(int userId, int orderId)
+        {
+            try
+            {
+                var result = await _OrderRepository.ReceiveOrder(userId, orderId);
+                return Ok(result);
+
+            }
+            catch (Exception e)
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpGet]
+        [Route("UpdateOrder")]
+        public async Task<IActionResult> UpdateStatusOrder(int orderId, int status)
+        {
+            try
+            {
+                var result = await _OrderRepository.UpdateOrderStatus(new Models.DBModels.Order()
+                {
+                    Id = orderId,
+                    OrderStatusId = status
+                });
+                return Ok(result);
+
+            }
+            catch (Exception e)
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpGet]
+        [Route("CancelOrder")]
+        public async Task<IActionResult> CancelOrder(int cancelType, int orderId, string reason)
+        {
+            try
+            {
+                if (cancelType == 1)
+                {
+                    var result = await _OrderRepository.ShopCancel(new Models.DBModels.Order()
+                    {
+                        Id = orderId,
+                        CancelReason = reason
+                    });
+                    return Ok(result);
+                }
+                else if (cancelType == 2)
+                {
+                    var result = await _OrderRepository.CustomerCancel(new Models.DBModels.Order()
+                    {
+                        Id = orderId,
+                        CancelReason = reason
+                    });
+                    return Ok(result);
+                }
+                else
+                {
+                    var result = await _OrderRepository.ShipperCancel(new Models.DBModels.Order()
+                    {
+                        Id = orderId,
+                        CancelReason = reason
+                    });
+                    return Ok(result);
+                }
+            }
+            catch (Exception e)
             {
                 return BadRequest();
             }

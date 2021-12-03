@@ -15,5 +15,6 @@ namespace api.Models.DBModels
         public string WardId { get; set; }
         public string DistrictId { get; set; }
         public string ProvinceId { get; set; }
+         public int Status { get; set; }
     }
 }
