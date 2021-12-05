@@ -20,13 +20,16 @@ namespace api.Models
         public int? OrderStatusId { get; set; }
         public int? ShipperId { get; set; }
         public string Status { get; set; }
-
+        public string EmailAddress { get; set; }
+        public string Name { get; set; }
+        public string Phone { get; set; }
     }
 
-    public class shipperViewOrder{
-         public User user  { get; set; }
-         public Order order  { get; set; }
-         public string Province {get;set;}
-        public string District {get;set;}
+    public class shipperViewOrder
+    {
+        public User user { get; set; }
+        public Order order { get; set; }
+        public string Province { get; set; }
+        public string District { get; set; }
     }
 }

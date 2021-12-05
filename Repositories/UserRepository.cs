@@ -62,9 +62,9 @@ namespace api.Repositories
                 }
                 else
                 {
-                    var totalRow = await _context.User.Where(x =>  x.Status == status).CountAsync();
+                    var totalRow = await _context.User.Where(x => x.Status == status).CountAsync();
                     var totalPage = (totalRow % pageSize == 0) ? (totalRow / pageSize) : (totalRow / pageSize) + 1;
-                    var result = await _context.User.Where(x =>x.Status == status).Skip((currentPage - 1) * pageSize).Take(pageSize).OrderBy(x => x.UserId).ToListAsync();
+                    var result = await _context.User.Where(x => x.Status == status).Skip((currentPage - 1) * pageSize).Take(pageSize).OrderBy(x => x.UserId).ToListAsync();
                     return new
                     {
                         totalPage = totalPage,
@@ -141,7 +141,9 @@ namespace api.Repositories
                             address = user.Address,
                             ward = ward.Name,
                             district = district.Name,
-                            province = province.Name
+                            province = province.Name,
+                            districtId = district.DistrictId,
+                            provinceId = province.ProvinceId
                         }
                     };
                 }

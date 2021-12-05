@@ -210,12 +210,12 @@ namespace api.Repositories
         
         public async Task<System.Object> GetProductsByCategory(int categoryId, int currentPage, int pageSize)
         {
-            if (_context != null)
-            {
-                var source = await _context.Product.FirstOrDefaultAsync(x => x. == categoryId);
-                var products = await source.Skip((currentPage - 1) * pageSize).Take(pageSize).OrderBy(x => x.Id).ToListAsync();
-                return result;
-            }
+            // if (_context != null)
+            // {
+            //     var source = await _context.Product.FirstOrDefaultAsync(x => x. == categoryId);
+            //     var products = await source.Skip((currentPage - 1) * pageSize).Take(pageSize).OrderBy(x => x.Id).ToListAsync();
+            //     return result;
+            // }
             return null;
         }
     }

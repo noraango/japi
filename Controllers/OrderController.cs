@@ -3,10 +3,6 @@ using System.Threading.Tasks;
 using api.Repositories.Dependencies;
 using Microsoft.AspNetCore.Mvc;
 using api.Models;
-using Microsoft.AspNetCore.Hosting;
-using api.Configs;
-using MailKit.Net.Smtp;
-using MimeKit;
 
 namespace api.Controllers
 {
@@ -84,7 +80,6 @@ namespace api.Controllers
                 return BadRequest();
             }
         }
-
         [HttpGet]
         [Route("GetOrder")]
         public async Task<IActionResult> GetOrderForShipper(int userId, int filterType, int page, int size)
@@ -107,7 +102,20 @@ namespace api.Controllers
                 return BadRequest();
             }
         }
-
+        [HttpGet]
+        [Route("ViewOrder")]
+        public async Task<IActionResult> ViewOrder(int orderId)
+        {
+            try
+            {
+                var result = await _OrderRepository.ViewOrder(new Models.DBModels.Order() { Id = orderId });
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                return BadRequest();
+            }
+        }
         [HttpGet]
         [Route("GetHistory")]
         public async Task<IActionResult> GetHistory(int userId, int page, int size)
@@ -122,7 +130,20 @@ namespace api.Controllers
                 return BadRequest();
             }
         }
-
+        [HttpGet]
+        [Route("GetShipping")]
+        public async Task<IActionResult> GetShipping(int userId, int page, int size)
+        {
+            try
+            {
+                var result = await _OrderRepository.ShippingOrder(userId, page, size);
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                return BadRequest();
+            }
+        }
         [HttpGet]
         [Route("ReceiveOrder")]
         public async Task<IActionResult> ReceiveOrder(int userId, int orderId)
@@ -167,16 +188,7 @@ namespace api.Controllers
             {
                 if (cancelType == 1)
                 {
-                    var result = await _OrderRepository.ShopCancel(new Models.DBModels.Order()
-                    {
-                        Id = orderId,
-                        CancelReason = reason
-                    });
-                    return Ok(result);
-                }
-                else if (cancelType == 2)
-                {
-                    var result = await _OrderRepository.CustomerCancel(new Models.DBModels.Order()
+                    var result = await _OrderRepository.CancelOrder(new Models.DBModels.Order()
                     {
                         Id = orderId,
                         CancelReason = reason
@@ -185,17 +197,18 @@ namespace api.Controllers
                 }
                 else
                 {
-                    var result = await _OrderRepository.ShipperCancel(new Models.DBModels.Order()
+                    var result = await _OrderRepository.CustomerCancel(new Models.DBModels.Order()
                     {
                         Id = orderId,
                         CancelReason = reason
                     });
                     return Ok(result);
                 }
+
             }
             catch (Exception e)
             {
-                return BadRequest();
+                return BadRequest(e.Message);
             }
         }
 

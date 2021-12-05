@@ -107,36 +107,36 @@ CREATE TABLE [Product] (
   [DisplayImageName] varchar(200),
 );
 insert into Product(Code,[Name],Price,Size,[Weight],Manufacturer,ShortDescription,[Description],Brand,OriginId,PackingMethodId,ProductStatusId,[DisplayImageName]) values
-('P0001',N'Củ hành',50000,'20cm x 20cm x 30cm',500,N'Nông trại vui vẻ',N'Đây là củ hành',N'Đây cũng là củ hành',N'Vui vẻ',2,2,1,'soldier-bu210527141.jpg'),
-('P0002',N'Củ khoai',60000,'20cm x 20cm x 30cm',600,N'Nông trại khoai',N'Đây là củ khoai',N'Đây cũng là củ khoai',N'Khoai',1,1,2,'soldier-bu210527141.jpg'),
-('P0003',N'Củ kiệu',70000,'20cm x 20cm x 30cm',700,N'Nông trại kiệu',N'Đây là củ kiệu',N'Đây cũng là củ kiệu',N'Kiệu',3,3,1,'soldier-bu210527141.jpg'),
-('P0004',N'Củ măng',71000,'20cm x 20cm x 30cm',750,N'Nông trại măng',N'Đây là củ măng',N'Đây cũng là củ măng',N'Măng',2,4,2,'soldier-bu210527141.jpg'),
-('P0005',N'Củ Sắn',74000,'20cm x 20cm x 30cm',810,N'Nông trại sắn',N'Đây là củ sắn',N'Đây cũng là củ sắn',N'Sắn',1,5,1,'soldier-bu210527141.jpg'),
-('P0006',N'Bắp Ngô',73000,'20cm x 20cm x 30cm',800,N'Nông trại ngô',N'Đây là bắp ngô',N'Đây cũng là bắp ngô',N'Ngô',3,6,2,'soldier-bu210527141.jpg'),
-('P0007',N'Rau Muống',75000,'20cm x 20cm x 30cm',820,N'Nông trại rau muống',N'Đây là rau muống',N'Đây cũng là rau muống',N'Rau muống',2,7,1,'soldier-bu210527141.jpg'),
-('P0008',N'Rau Cải',7600,'20cm x 20cm x 30cm',830,N'Nông trại rau cải',N'Đây là rau cải',N'Đây cũng là rau cải',N'Rau cải',1,8,2,'soldier-bu210527141.jpg'),
-('P0009',N'Rau Ngót',77000,'20cm x 20cm x 30cm',840,N'Nông trại rau ngót',N'Đây là rau ngót',N'Đây cũng là rau ngót',N'Rau ngót',3,2,1,'soldier-bu210527141.jpg'),
-('P0010',N'Rau Bắp Cải',78000,'20cm x 20cm x 30cm',850,N'Nông trại bắp cải',N'Đây là rau bắp cải',N'Đây cũng là rau bắp cải',N'Bắp Cải',2,2,2,'soldier-bu210527141.jpg'),
-('P0011',N'Rau Súp Lơ',79000,'20cm x 20cm x 30cm',860,N'Nông trại súp lơ',N'Đây là rau súp lơ',N'Đây cũng là súp lơ',N'Súp lơ',2,2,1,'soldier-bu210527141.jpg'),
-('P0012',N'Quả Bầu',80000,'20cm x 20cm x 30cm',870,N'Nông trại bầu',N'Đây là quả bầu',N'Đây cũng là quả bầu',N'Quả bầu',2,2,2,'soldier-bu210527141.jpg'),
-('P0013',N'Quả Bí',81000,'20cm x 20cm x 30cm',880,N'Nông trại bí',N'Đây là quả bí',N'Đây cũng là cquả bí',N'Quả bí',2,2,1,'soldier-bu210527141.jpg'),
-('P0014',N'Quả Mướp',82000,'20cm x 20cm x 30cm',890,N'Nông trại mướp',N'Đây là quả mướp',N'Đây cũng là quả mướp',N'Mướp',2,2,2,'soldier-bu210527141.jpg'),
-('P0015',N'Quả Bí Dao',83000,'20cm x 20cm x 30cm',900,N'Nông trại bí đao',N'Đây là quả bí đao',N'Đây cũng là quả bí đao',N'Bí Đao',2,2,1,'soldier-bu210527141.jpg'),
-('P0016',N'Quả Đậu',84000,'20cm x 20cm x 30cm',910,N'Nông trại đậu',N'Đây là quả đậu',N'Đây cũng là quả đậu',N'Đậu',2,2,2,'soldier-bu210527141.jpg'),
-('P0017',N'Quả Ổi',85000,'20cm x 20cm x 30cm',920,N'Nông trại ổi',N'Đây là quả ổi',N'Đây cũng là quả ổi',N'Ổi',2,2,1,'soldier-bu210527141.jpg'),
-('P0018',N'Quả Sung',86000,'20cm x 20cm x 30cm',930,N'Nông trại sung',N'Đây là quả sung',N'Đây cũng là quả sung',N'Sung',2,2,2,'soldier-bu210527141.jpg'),
-('P0019',N'Quả Táo',87000,'20cm x 20cm x 30cm',940,N'Nông trại táo',N'Đây là quả táo',N'Đây cũng là quả táo',N'Táo',2,2,1,'soldier-bu210527141.jpg'),
-('P0020',N'Quả Lê',88000,'20cm x 20cm x 30cm',941,N'Nông trại lê',N'Đây là quả lê',N'Đây cũng là quả lê',N'Lê',2,2,2,'soldier-bu210527141.jpg'),
-('P0021',N'Quả Dưa',89000,'20cm x 20cm x 30cm',942,N'Nông trại dưa',N'Đây là quả dưa',N'Đây cũng là quả dưa',N'Dưa',2,2,1,'soldier-bu210527141.jpg'),
-('P0022',N'Quả Nho',90000,'20cm x 20cm x 30cm',943,N'Nông trại nho',N'Đây là quả nho',N'Đây cũng là quả nho',N'Nho',2,2,2,'soldier-bu210527141.jpg'),
-('P0023',N'Quả Dâu Tây',91000,'20cm x 20cm x 30cm',284,N'Nông trại dâu tây',N'Đây là quả dâu tây',N'Đây cũng là quả dâu tây',N'Dây tây',2,1,1,'soldier-bu210527141.jpg'),
-('P0024',N'Quả Cóc',92000,'20cm x 20cm x 30cm',945,N'Nông trại cóc',N'Đây là quả cóc',N'Đây cũng là quả cóc',N'Quả Cóc',2,2,2,'soldier-bu210527141.jpg'),
-('P0025',N'Quả Cherry',93000,'20cm x 20cm x 30cm',946,N'Nông trại cherry',N'Đây là quả cherry',N'Đây cũng là quả cherry',N'Cherry',2,3,1,'soldier-bu210527141.jpg'),
-('P0026',N'Quả Xoài',94000,'20cm x 20cm x 30cm',947,N'Nông trại xoài',N'Đây là quả xoài',N'Đây cũng là quả xoài',N'Quả xoài',2,4,2,'soldier-bu210527141.jpg'),
-('P0027',N'Quả Bơ',95000,'20cm x 20cm x 30cm',948,N'Nông trại bơ',N'Đây là quả bơ',N'Đây cũng là quả bơ',N'Quả bơ',2,5,1,'soldier-bu210527141.jpg'),
-('P0028',N'Quả Sầu Riêng',96000,'20cm x 20cm x 30cm',949,N'Nông trại sầu riêng',N'Đây là quả sầu riêng',N'Đây cũng là quả sầu riêng',N'Sầu riêng',2,6,2,'soldier-bu210527141.jpg'),
-('P0029',N'Quả Mít',97000,'20cm x 20cm x 30cm',950,N'Nông trại mít',N'Đây là quả mít',N'Đây cũng là quả mít',N'Mít',2,7,2,'soldier-bu210527141.jpg'),
-('P0030',N'Quả Nhãn',98000,'20cm x 20cm x 30cm',960,N'Nông trại nhãn',N'Đây là quả nhãn',N'Đây cũng là quả nhãn',N'Nhãn',2,8,2,'soldier-bu210527141.jpg')
+('P0001',N'Củ hành',50000,'20cm x 20cm x 30cm',500,N'Nông trại vui vẻ',N'Đây là củ hành',N'Đây cũng là củ hành',N'Vui vẻ',2,2,1,'01.jpg'),
+('P0002',N'Củ khoai',60000,'20cm x 20cm x 30cm',600,N'Nông trại khoai',N'Đây là củ khoai',N'Đây cũng là củ khoai',N'Khoai',1,1,2,'02.jpg'),
+('P0003',N'Củ kiệu',70000,'20cm x 20cm x 30cm',700,N'Nông trại kiệu',N'Đây là củ kiệu',N'Đây cũng là củ kiệu',N'Kiệu',3,3,1,'03.jpg'),
+('P0004',N'Củ măng',71000,'20cm x 20cm x 30cm',750,N'Nông trại măng',N'Đây là củ măng',N'Đây cũng là củ măng',N'Măng',2,4,2,'04.jpg'),
+('P0005',N'Củ Sắn',74000,'20cm x 20cm x 30cm',810,N'Nông trại sắn',N'Đây là củ sắn',N'Đây cũng là củ sắn',N'Sắn',1,5,1,'05.jpg'),
+('P0006',N'Bắp Ngô',73000,'20cm x 20cm x 30cm',800,N'Nông trại ngô',N'Đây là bắp ngô',N'Đây cũng là bắp ngô',N'Ngô',3,6,2,'06.jpg'),
+('P0007',N'Rau Muống',75000,'20cm x 20cm x 30cm',820,N'Nông trại rau muống',N'Đây là rau muống',N'Đây cũng là rau muống',N'Rau muống',2,7,1,'07.jpg'),
+('P0008',N'Rau Cải',7600,'20cm x 20cm x 30cm',830,N'Nông trại rau cải',N'Đây là rau cải',N'Đây cũng là rau cải',N'Rau cải',1,8,2,'08.jpg'),
+('P0009',N'Rau Ngót',77000,'20cm x 20cm x 30cm',840,N'Nông trại rau ngót',N'Đây là rau ngót',N'Đây cũng là rau ngót',N'Rau ngót',3,2,1,'09.jpg'),
+('P0010',N'Rau Bắp Cải',78000,'20cm x 20cm x 30cm',850,N'Nông trại bắp cải',N'Đây là rau bắp cải',N'Đây cũng là rau bắp cải',N'Bắp Cải',2,2,2,'10.jpg'),
+('P0011',N'Rau Súp Lơ',79000,'20cm x 20cm x 30cm',860,N'Nông trại súp lơ',N'Đây là rau súp lơ',N'Đây cũng là súp lơ',N'Súp lơ',2,2,1,'11.jpg'),
+('P0012',N'Quả Bầu',80000,'20cm x 20cm x 30cm',870,N'Nông trại bầu',N'Đây là quả bầu',N'Đây cũng là quả bầu',N'Quả bầu',2,2,2,'12.jpg'),
+('P0013',N'Quả Bí',81000,'20cm x 20cm x 30cm',880,N'Nông trại bí',N'Đây là quả bí',N'Đây cũng là cquả bí',N'Quả bí',2,2,1,'13.jpg'),
+('P0014',N'Quả Mướp',82000,'20cm x 20cm x 30cm',890,N'Nông trại mướp',N'Đây là quả mướp',N'Đây cũng là quả mướp',N'Mướp',2,2,2,'14.jpg'),
+('P0015',N'Quả Bí Dao',83000,'20cm x 20cm x 30cm',900,N'Nông trại bí đao',N'Đây là quả bí đao',N'Đây cũng là quả bí đao',N'Bí Đao',2,2,1,'15.jpg'),
+('P0016',N'Quả Đậu',84000,'20cm x 20cm x 30cm',910,N'Nông trại đậu',N'Đây là quả đậu',N'Đây cũng là quả đậu',N'Đậu',2,2,2,'16.jpg'),
+('P0017',N'Quả Ổi',85000,'20cm x 20cm x 30cm',920,N'Nông trại ổi',N'Đây là quả ổi',N'Đây cũng là quả ổi',N'Ổi',2,2,1,'01.jpg'),
+('P0018',N'Quả Sung',86000,'20cm x 20cm x 30cm',930,N'Nông trại sung',N'Đây là quả sung',N'Đây cũng là quả sung',N'Sung',2,2,2,'02.jpg'),
+('P0019',N'Quả Táo',87000,'20cm x 20cm x 30cm',940,N'Nông trại táo',N'Đây là quả táo',N'Đây cũng là quả táo',N'Táo',2,2,1,'03.jpg'),
+('P0020',N'Quả Lê',88000,'20cm x 20cm x 30cm',941,N'Nông trại lê',N'Đây là quả lê',N'Đây cũng là quả lê',N'Lê',2,2,2,'04.jpg'),
+('P0021',N'Quả Dưa',89000,'20cm x 20cm x 30cm',942,N'Nông trại dưa',N'Đây là quả dưa',N'Đây cũng là quả dưa',N'Dưa',2,2,1,'05.jpg'),
+('P0022',N'Quả Nho',90000,'20cm x 20cm x 30cm',943,N'Nông trại nho',N'Đây là quả nho',N'Đây cũng là quả nho',N'Nho',2,2,2,'06.jpg'),
+('P0023',N'Quả Dâu Tây',91000,'20cm x 20cm x 30cm',284,N'Nông trại dâu tây',N'Đây là quả dâu tây',N'Đây cũng là quả dâu tây',N'Dây tây',2,1,1,'07.jpg'),
+('P0024',N'Quả Cóc',92000,'20cm x 20cm x 30cm',945,N'Nông trại cóc',N'Đây là quả cóc',N'Đây cũng là quả cóc',N'Quả Cóc',2,2,2,'08.jpg'),
+('P0025',N'Quả Cherry',93000,'20cm x 20cm x 30cm',946,N'Nông trại cherry',N'Đây là quả cherry',N'Đây cũng là quả cherry',N'Cherry',2,3,1,'09.jpg'),
+('P0026',N'Quả Xoài',94000,'20cm x 20cm x 30cm',947,N'Nông trại xoài',N'Đây là quả xoài',N'Đây cũng là quả xoài',N'Quả xoài',2,4,2,'10.jpg'),
+('P0027',N'Quả Bơ',95000,'20cm x 20cm x 30cm',948,N'Nông trại bơ',N'Đây là quả bơ',N'Đây cũng là quả bơ',N'Quả bơ',2,5,1,'11.jpg'),
+('P0028',N'Quả Sầu Riêng',96000,'20cm x 20cm x 30cm',949,N'Nông trại sầu riêng',N'Đây là quả sầu riêng',N'Đây cũng là quả sầu riêng',N'Sầu riêng',2,6,2,'12.jpg'),
+('P0029',N'Quả Mít',97000,'20cm x 20cm x 30cm',950,N'Nông trại mít',N'Đây là quả mít',N'Đây cũng là quả mít',N'Mít',2,7,2,'13.jpg'),
+('P0030',N'Quả Nhãn',98000,'20cm x 20cm x 30cm',960,N'Nông trại nhãn',N'Đây là quả nhãn',N'Đây cũng là quả nhãn',N'Nhãn',2,8,2,'14.jpg')
 
 select * from Product;
 
@@ -270,17 +270,18 @@ CREATE TABLE [User] (
   [WardId] varchar(20),
   [DistrictId] varchar(20),
   [ProvinceId] varchar(20),
+  [Status] int
 );
 
-insert into [User](UserRoleId,EncodedPassword,LastName,MiddleName,FirstName,Phone,Email,[Address],AvatarFilename,WardId,DistrictId,ProvinceId) values 
-(1,'123',N'Ngô',N'Thế',N'Anh','0357467491','timer217@gmail.com','Sơn La','avatar.jpg','00625','019HH','01TTT'),
-(1,'123','Ngo',N'Quang','Anh','086522454','anh123@gmail.com','PhuTho','avatar.jpg','00625','019HH','01TTT'),
-(1,'123','Do',N'Quang','Tung','0763845','tung123@gmail.com','PhuTho','avatar.jpg','00625','019HH','01TTT'),
-(1,'123','Nguyen',N'Quang','Dat','066354845','tung123@gmail.com','PhuTho','avatar.jpg','00625','019HH','01TTT'),
-(1,'123','Nguyen',N'Quang','Khanh','056359548','khanh123@gmail.com','PhuTho','avatar.jpg','00625','019HH','01TTT'),
-(2,'123','Nguyen',N'Quang','Van','046359548','nguyenvan23@gmail.com','PhuTho','avatar.jpg','00625','019HH','01TTT'),
-(3,'123','Hoang',N'Quang','An','036359548','hoangan123@gmail.com','PhuTho','avatar.jpg','00625','019HH','01TTT'),
-(4,'123','Chu',N'Quang','Nam','026359548','chunam23@gmail.com','PhuTho','avatar.jpg','00625','019HH','01TTT');
+insert into [User](UserRoleId,EncodedPassword,LastName,MiddleName,FirstName,Phone,Email,[Address],AvatarFilename,WardId,DistrictId,ProvinceId,[Status]) values 
+(1,'123',N'Ngô',N'Thế',N'Anh','0357467491','timer217@gmail.com','Đối diện bến xe buýt','avatar.jpg','04138','125HH','14TTT',1),
+(5,'123','Ngo',N'Quang','Anh','086522454','timer218@gmail.com','PhuTho','avatar.jpg','00625','019HH','01TTT',1),
+(1,'123','Do',N'Quang','Tung','0763845','tung123@gmail.com','PhuTho','avatar.jpg','00625','019HH','01TTT',1),
+(1,'123','Nguyen',N'Quang','Dat','066354845','tung123@gmail.com','PhuTho','avatar.jpg','00625','019HH','01TTT',1),
+(1,'123','Nguyen',N'Quang','Khanh','056359548','khanh123@gmail.com','PhuTho','avatar.jpg','00625','019HH','01TTT',1),
+(2,'123','Nguyen',N'Quang','Van','046359548','nguyenvan23@gmail.com','PhuTho','avatar.jpg','00625','019HH','01TTT',1),
+(3,'123','Hoang',N'Quang','An','036359548','hoangan123@gmail.com','PhuTho','avatar.jpg','00625','019HH','01TTT',1),
+(4,'123','Chu',N'Quang','Nam','026359548','chunam23@gmail.com','PhuTho','avatar.jpg','00625','019HH','01TTT',1);
 
 select * from [User]
 
@@ -351,10 +352,10 @@ CREATE TABLE [OrderItem] (
   [Quantity] int,
 );
 insert into OrderItem(OrderId,ProductId,Quantity)values
-(1,20,15),
-(2,21,15),
-(3,24,15),
-(4,26,15);
+(1,1,15),
+(1,2,15),
+(1,3,15),
+(1,4,15);
 select * from [OrderItem];
 
 
@@ -395,27 +396,25 @@ select * from Shipper;
 drop table [Order];
 CREATE TABLE [Order] (
   [Id] int IDENTITY(1,1) PRIMARY KEY,
+  [Guid] varchar(50),
   [UserId] int,
   [WeekendDelivery] bit,
   [EarliestDeliveryDate] date,
   [LatestDeliveryDate] date,
   [Address] nvarchar(500),
-
   [WardId] varchar(20),
     [DistrictId] varchar(20),
 	  [ProvinceId] varchar(20),
-
   [OrderStatusId] int,
   [ShipperID] int,
+  [Price] int,
+  [CancelReason] nvarchar(1000),
+  [ShopId] int
 );
-insert into [Order](UserId,WeekendDelivery,EarliestDeliveryDate,LatestDeliveryDate,[Address],ProvinceId,DistrictId,WardId,OrderStatusId,ShipperID) values
-(1,'True','2021-12-05','2021-12-01',N'số 12, ngõ 23, đường Lê Đức Thắn/g','00625','019HH','01TTT',1,1),
-(2,'False','2021-12-05','2021-12-01',N'số 12, ngõ 23, đường Lê Đức Thắn/g','00625','019HH','01TTT',2,2),
-(3,'True','2021-12-05','2021-12-01',N'số 12, ngõ 23, đường Lê Đức Thắn/g','00625','019HH','01TTT',3,3),
-(4,'False','2021-12-05','2021-12-01',N'số 12, ngõ 23, đường Lê Đức Thắn/g','00625','019HH','01TTT',4,4),
-(4,'False','2021-12-05','2021-12-01',N'số 12, ngõ 23, đường Lê Đức Thắn/g','00625','019HH','01TTT',4,5);
+insert into [Order](UserId,Guid,WeekendDelivery,EarliestDeliveryDate,LatestDeliveryDate,[Address],ProvinceId,DistrictId,WardId,OrderStatusId,ShipperID,CancelReason,Price,ShopId) values
+(1,'42550d49-5dd3-414e-a496-3beb6613e5bd','True','2021-12-05','2021-12-01',N'số 12, ngõ 23, đường Lê Đức Thắng','00625','019HH','01TTT',1,1,'',0,1);
 
-select * from [Order]
+select * from [Order];
 
 
 --Product Rating
