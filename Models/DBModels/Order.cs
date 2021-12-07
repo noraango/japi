@@ -15,7 +15,7 @@ namespace api.Models.DBModels
         public string ProvinceId { get; set; }
         public int? OrderStatusId { get; set; }
         public int? ShipperId { get; set; }
-        public double? Price { get; set; }
+        public int? Price { get; set; }
         public string CancelReason { get; set; }
         public int? ShopId { get; set; }
     }

@@ -412,7 +412,7 @@ CREATE TABLE [Order] (
   [ShopId] int
 );
 insert into [Order](UserId,Guid,WeekendDelivery,EarliestDeliveryDate,LatestDeliveryDate,[Address],ProvinceId,DistrictId,WardId,OrderStatusId,ShipperID,CancelReason,Price,ShopId) values
-(1,'42550d49-5dd3-414e-a496-3beb6613e5bd','True','2021-12-05','2021-12-01',N'số 12, ngõ 23, đường Lê Đức Thắng','00625','019HH','01TTT',1,1,'',0,1);
+(1,'42550d49-5dd3-414e-a496-3beb6613e5bd','True','2021-12-05',N'2021-12-01',N'số 12, ngõ 23, đường Lê Đức Thắng','00625','019HH','01TTT',1,1,'',0,1);
 
 select * from [Order];
 

@@ -355,7 +355,6 @@ namespace api.Repositories
             if (_context != null)
             {
                 var data = await _context.Order.FirstOrDefaultAsync(x => x.Id == order.Id);
-                data.ShipperId = order.ShipperId;
                 data.OrderStatusId = order.OrderStatusId;
                 return await _context.SaveChangesAsync();
             }
