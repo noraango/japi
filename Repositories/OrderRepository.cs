@@ -413,10 +413,9 @@ namespace api.Repositories
             return Task.CompletedTask;
         }
 
-        public async Task<System.Object> BuyProduct(int productId, int quantity, int userId)
-        {
+       public async  Task<System.Object> BuyProduct(int productId,int quantity,int userId){
 
-            return null;
-        }
+           return null;
+       }
     }
 }
