@@ -16,8 +16,8 @@ namespace api.Repositories.Dependencies
         Task<System.Object> getComments(int productId, int currentPage, int pageSize);
         Task<System.Object> GetProductsByCategory(int categoryId, int currentPage, int pageSize);
 
-        Task<List<string>> DetailImages(int productId);
+         Task<List<string>> DetailImages(int productId);
 
-        Task<System.Object> GetComment(int productId, int page, int size);
+          Task<System.Object> GetComment(int productId,int page);
     }
 }

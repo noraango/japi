@@ -182,24 +182,6 @@ namespace api.Controllers
             }
         }
         [HttpGet]
-        [Route("getComment/{id}/{page}/{size}")]
-        public async Task<IActionResult> getComment(int? id,int? page,int? size)
-        {
-            try
-            {
-                var result = await _ProductRepository.GetComment(id ?? default(int),page ?? default(int),size ?? default(int));
-                if (result == null)
-                {
-                    return NotFound();
-                }
-                return Ok(result);
-            }
-            catch (Exception)
-            {
-                return BadRequest();
-            }
-        }
-        [HttpGet]
         [Route("comments")]
         public async Task<IActionResult> Comments(int? id, int? CurrentPage, int? PageSize)
         {

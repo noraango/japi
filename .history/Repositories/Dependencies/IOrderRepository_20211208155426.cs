@@ -24,6 +24,6 @@ namespace api.Repositories.Dependencies
 
          Task<System.Object> ViewOrder(Order order);
 
-          Task<System.Object> BuyProduct(int productId,int quantity,int userId);
+          Task<System.Object> BuyProduct(int productId,int quantity);
     }
 }

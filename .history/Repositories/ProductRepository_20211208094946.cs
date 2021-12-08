@@ -185,8 +185,7 @@ namespace api.Repositories
             return null;
         }
         public async Task<List<string>> DetailImages(int productId)
-        {
-            if (_context != null)
+        {if (_context != null)
             {
                 List<string> imageNames = new List<string>();
                 var productImages = await _context.ProductImage.AsQueryable().Where(x => x.ProductId == productId).ToListAsync();
@@ -194,25 +193,8 @@ namespace api.Repositories
                 {
                     imageNames.Add(item.Name);
                 }
+                
                 return imageNames;
-            }
-            return null;
-        }
-
-        public async Task<System.Object> GetComment(int productId, int page,int size)
-        {
-            if (_context != null)
-            {
-                var totalRow = await _context.ProductRating.AsQueryable().Where(x => x.ProductId == productId).CountAsync();
-                var totalPage = (totalRow % size == 0) ? (totalRow / size) : (totalRow / size) + 1;
-                var ratings = await _context.ProductRating.AsQueryable().Where(x => x.ProductId == productId)
-                .Skip((page - 1) * size).Take(size).OrderByDescending(x => x.RateTime).ToListAsync();
-                return new
-                {
-                    totalPage = totalPage,
-                    totalRow = totalRow,
-                    data = ratings
-                };
             }
             return null;
         }
@@ -238,7 +220,7 @@ namespace api.Repositories
             }
             return null;
         }
-
+        
         public async Task<System.Object> GetProductsByCategory(int categoryId, int currentPage, int pageSize)
         {
             // if (_context != null)

@@ -212,19 +212,5 @@ namespace api.Controllers
             }
         }
 
-        [HttpGet]
-        [Route("BuyNow")]
-        public async Task<IActionResult> BuyNow(int productId, int quantity,int userId)
-        {
-            try
-            {
-                var result = await _OrderRepository.BuyProduct(productId,quantity,userId);
-                return Ok(result);
-            }
-            catch (Exception e)
-            {
-                return BadRequest(e.Message);
-            }
-        }
     }
 }
