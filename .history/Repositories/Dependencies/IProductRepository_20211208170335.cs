@@ -18,6 +18,6 @@ namespace api.Repositories.Dependencies
 
         Task<List<string>> DetailImages(int productId);
 
-        Task<System.Object> GetComment(int productId, int page, int size);
+        Task<System.Object> GetComment(int productId, int page);
     }
 }

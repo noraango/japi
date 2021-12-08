@@ -182,12 +182,12 @@ namespace api.Controllers
             }
         }
         [HttpGet]
-        [Route("getComment/{id}/{page}/{size}")]
-        public async Task<IActionResult> getComment(int? id,int? page,int? size)
+        [Route("getComment/{id}/{page}")]
+        public async Task<IActionResult> getComment(int? id,int? page)
         {
             try
             {
-                var result = await _ProductRepository.GetComment(id ?? default(int),page ?? default(int),size ?? default(int));
+                var result = await _ProductRepository.GetComment(id ?? default(int),page ?? default(int));
                 if (result == null)
                 {
                     return NotFound();

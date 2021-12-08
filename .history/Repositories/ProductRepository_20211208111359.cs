@@ -199,14 +199,15 @@ namespace api.Repositories
             return null;
         }
 
-        public async Task<System.Object> GetComment(int productId, int page,int size)
+        public async Task<System.Object> GetComment(int productId, int page)
         {
             if (_context != null)
             {
-                var totalRow = await _context.ProductRating.AsQueryable().Where(x => x.ProductId == productId).CountAsync();
-                var totalPage = (totalRow % size == 0) ? (totalRow / size) : (totalRow / size) + 1;
+                var totalRow = await _context.ProductRating.AsQueryable().Where(x => x.ProductId == productId)
+                .Skip((page - 1) * 5).Take(5).OrderBy(x => x.RateTime).CountAsync();
+                var totalPage = (totalRow % 5 == 0) ? (totalRow / 5) : (totalRow / 5) + 1;
                 var ratings = await _context.ProductRating.AsQueryable().Where(x => x.ProductId == productId)
-                .Skip((page - 1) * size).Take(size).OrderByDescending(x => x.RateTime).ToListAsync();
+                .Skip((page - 1) * 5).Take(5).OrderBy(x => x.RateTime).ToListAsync();
                 return new
                 {
                     totalPage = totalPage,

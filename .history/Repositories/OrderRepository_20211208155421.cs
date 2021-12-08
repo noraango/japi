@@ -190,26 +190,25 @@ namespace api.Repositories
             return null;
         }
 
-        public async Task<IEnumerable<OrderModel>> GetOrdersByUserId(int userId, int statusId)
+        public async Task<IEnumerable<OrderModel>> GetOrdersByUserId(int userId)
         {
             if (_context != null)
             {
                 var result = new List<OrderModel>();
                 var source = await _context.Order.AsQueryable().Where(x => x.UserId == userId).ToListAsync();
-                if (statusId > 0)
-                {
-                    source = await _context.Order.AsQueryable().Where(x => x.UserId == userId && x.OrderStatusId == statusId).ToListAsync();
-                }
                 foreach (Order item in source)
                 {
                     var model = new OrderModel();
                     model.Id = item.Id;
                     model.UserId = item.UserId;
                     model.Address = item.Address;
-                    var district = await _context.LocationDistrict.FirstOrDefaultAsync(x => x.DistrictId == item.DistrictId);
+                    var ward = await _context.LocationWard.FirstOrDefaultAsync(x => x.WardId.Equals(item.WardId));
+                    model.WardId = item.WardId;
+                    model.Ward = ward.Name;
+                    var district = await _context.LocationDistrict.FirstOrDefaultAsync(x => x.DistrictId.Equals(item.DistrictId));
                     model.DistrictId = item.DistrictId;
                     model.District = district.Name;
-                    var province = await _context.LocationProvince.FirstOrDefaultAsync(x => x.ProvinceId == item.ProvinceId);
+                    var province = await _context.LocationProvince.FirstOrDefaultAsync(x => x.ProvinceId.Equals(item.ProvinceId));
                     model.ProvinceId = item.ProvinceId;
                     model.Province = province.Name;
                     model.EarliestDeliveryDate = item.EarliestDeliveryDate;
@@ -413,10 +412,9 @@ namespace api.Repositories
             return Task.CompletedTask;
         }
 
-        public async Task<System.Object> BuyProduct(int productId, int quantity, int userId)
-        {
+       public async  Task<System.Object> BuyProduct(int productId,int quantity){
 
-            return null;
-        }
+           return null;
+       }
     }
 }
