@@ -73,7 +73,7 @@ namespace api.Controllers
         {
             try
             {
-                var result = await _UserRepository.ForgotPass(email);
+                var result = await _UserRepository.CheckEmail(email);
                 return Ok(result);
             }
             catch (Exception e)

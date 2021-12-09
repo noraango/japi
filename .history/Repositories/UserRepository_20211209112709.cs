@@ -208,29 +208,6 @@ namespace api.Repositories
             return null;
         }
 
-        public async Task<object> ForgotPass(string email)
-        {
-            if (_context != null)
-            {
-                var user = await _context.User.FirstOrDefaultAsync(x => x.Email.Equals(email));
-                if (user != null)
-                {
-                    await new MailService().Send(user.Email, "Lấy lại mật khẩu", "Mật khẩu của bạn là : " + user.EncodedPassword);
-                    return new
-                    {
-                        status = true
-                    };
-                }
-                else
-                {
-                    return new
-                    {
-                        status = false
-                    };
-                }
-            }
-            return null;
-        }
         public async Task<object> RoleRegister(RoleRequest request)
         {
             if (_context != null)

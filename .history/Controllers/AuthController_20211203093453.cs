@@ -35,45 +35,27 @@ namespace api.Controllers
 
         [HttpPost]
         [Route("register")]
-        public async Task<IActionResult> Register(string email,string password,string name,string phone)
+        public async Task<IActionResult> Register([FromForm] User user)
         {
             try
             {
-                var result = await _UserRepository.Register(new Models.DBModels.User(){
-                    Email = email,
-                    EncodedPassword = password,
-                    FirstName = name,
-                    Phone = phone
-                });
-                return Ok(result);
-            }
-            catch (Exception e)
-            {
-                return BadRequest();
-            }
-        }
-        [HttpPost]
-        [Route("checkEmail")]
-        public async Task<IActionResult> CheckEmail(string email)
-        {
-            try
-            {
-                var result = await _UserRepository.CheckEmail(email);
-                return Ok(result);
-            }
-            catch (Exception e)
-            {
-                return BadRequest();
-            }
-        }
-
-        [HttpPost]
-        [Route("forgotPass")]
-        public async Task<IActionResult> ForgotPass(string email)
-        {
-            try
-            {
-                var result = await _UserRepository.ForgotPass(email);
+                if (user.Email == null || user.Email == "")
+                {
+                    return Ok(new
+                    {
+                        status = false,
+                        message = "Email must not be empty"
+                    });
+                }
+                if (user.EncodedPassword == null || user.EncodedPassword == "")
+                {
+                    return Ok(new
+                    {
+                        status = false,
+                        message = "Password must not be empty"
+                    });
+                }   
+                var result = await _UserRepository.Register(user);
                 return Ok(result);
             }
             catch (Exception e)

@@ -8,7 +8,7 @@ namespace api.Repositories.Dependencies
         Task<object> Login(string username, string password);
         Task<object> Register(User data);
         Task<int> Forget(int id);
-        Task<object> ForgotPass(string email);
+
         Task<object> RoleRegister(RoleRequest request);
         Task<object> UpdateRoleRequest(RoleRequest request);
         Task<System.Object> GetRequest(int currentPage, int pageSize);

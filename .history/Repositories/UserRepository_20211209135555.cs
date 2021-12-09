@@ -215,7 +215,7 @@ namespace api.Repositories
                 var user = await _context.User.FirstOrDefaultAsync(x => x.Email.Equals(email));
                 if (user != null)
                 {
-                    await new MailService().Send(user.Email, "Lấy lại mật khẩu", "Mật khẩu của bạn là : " + user.EncodedPassword);
+                    await new MailService().Send(user.Email,"Lấy lại mật khẩu","Mật khẩu của bạn là : "+user.EncodedPassword);
                     return new
                     {
                         status = true

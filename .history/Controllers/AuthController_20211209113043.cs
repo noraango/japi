@@ -35,45 +35,15 @@ namespace api.Controllers
 
         [HttpPost]
         [Route("register")]
-        public async Task<IActionResult> Register(string email,string password,string name,string phone)
+        public async Task<IActionResult> Register(string email,string password,string name)
         {
             try
             {
                 var result = await _UserRepository.Register(new Models.DBModels.User(){
                     Email = email,
                     EncodedPassword = password,
-                    FirstName = name,
-                    Phone = phone
+                    FirstName = name
                 });
-                return Ok(result);
-            }
-            catch (Exception e)
-            {
-                return BadRequest();
-            }
-        }
-        [HttpPost]
-        [Route("checkEmail")]
-        public async Task<IActionResult> CheckEmail(string email)
-        {
-            try
-            {
-                var result = await _UserRepository.CheckEmail(email);
-                return Ok(result);
-            }
-            catch (Exception e)
-            {
-                return BadRequest();
-            }
-        }
-
-        [HttpPost]
-        [Route("forgotPass")]
-        public async Task<IActionResult> ForgotPass(string email)
-        {
-            try
-            {
-                var result = await _UserRepository.ForgotPass(email);
                 return Ok(result);
             }
             catch (Exception e)

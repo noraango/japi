@@ -52,35 +52,6 @@ namespace api.Controllers
                 return BadRequest();
             }
         }
-        [HttpPost]
-        [Route("checkEmail")]
-        public async Task<IActionResult> CheckEmail(string email)
-        {
-            try
-            {
-                var result = await _UserRepository.CheckEmail(email);
-                return Ok(result);
-            }
-            catch (Exception e)
-            {
-                return BadRequest();
-            }
-        }
-
-        [HttpPost]
-        [Route("forgotPass")]
-        public async Task<IActionResult> ForgotPass(string email)
-        {
-            try
-            {
-                var result = await _UserRepository.ForgotPass(email);
-                return Ok(result);
-            }
-            catch (Exception e)
-            {
-                return BadRequest();
-            }
-        }
 
         [HttpPost]
         [Route("forget")]

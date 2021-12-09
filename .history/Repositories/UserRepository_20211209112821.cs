@@ -174,48 +174,14 @@ namespace api.Repositories
         {
             if (_context != null)
             {
-                var user = await _context.User.FirstOrDefaultAsync(x => x.Email.Equals(data.Email));
-                if (user == null)
-                {
-                    data.UserRoleId = 4;
-                    data.Status = 1;
-                    await _context.User.AddAsync(data);
-                    await _context.SaveChangesAsync();
-                    var result = await _context.User.FirstOrDefaultAsync(x => x.Email.Equals(data.Email) && x.EncodedPassword.Equals(data.EncodedPassword));
-                    if (result != null)
-                    {
-                        return new
-                        {
-                            status = true
-                        };
-                    }
-                    else
-                    {
-                        return new
-                        {
-                            status = false
-                        };
-                    }
-                }
-                else
-                {
-                    return new
-                    {
-                        status = false
-                    };
-                }
-            }
-            return null;
-        }
 
-        public async Task<object> ForgotPass(string email)
-        {
-            if (_context != null)
-            {
-                var user = await _context.User.FirstOrDefaultAsync(x => x.Email.Equals(email));
-                if (user != null)
+                data.UserRoleId = 4;
+                data.Status = 1;
+                await _context.User.AddAsync(data);
+                await _context.SaveChangesAsync();
+                var result = await _context.User.FirstOrDefaultAsync(x => x.Email.Equals(data.Email) && x.EncodedPassword.Equals(data.EncodedPassword));
+                if (result != null)
                 {
-                    await new MailService().Send(user.Email, "Lấy lại mật khẩu", "Mật khẩu của bạn là : " + user.EncodedPassword);
                     return new
                     {
                         status = true
@@ -228,9 +194,11 @@ namespace api.Repositories
                         status = false
                     };
                 }
+
             }
             return null;
         }
+
         public async Task<object> RoleRegister(RoleRequest request)
         {
             if (_context != null)
