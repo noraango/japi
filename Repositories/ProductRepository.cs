@@ -199,7 +199,7 @@ namespace api.Repositories
             return null;
         }
 
-        public async Task<System.Object> GetComment(int productId, int page,int size)
+        public async Task<System.Object> GetComment(int productId, int page, int size)
         {
             if (_context != null)
             {
@@ -241,12 +241,30 @@ namespace api.Repositories
 
         public async Task<System.Object> GetProductsByCategory(int categoryId, int currentPage, int pageSize)
         {
-            // if (_context != null)
-            // {
-            //     var source = await _context.Product.FirstOrDefaultAsync(x => x. == categoryId);
-            //     var products = await source.Skip((currentPage - 1) * pageSize).Take(pageSize).OrderBy(x => x.Id).ToListAsync();
-            //     return result;
-            // }
+            if (_context != null)
+            {
+                var list = new List<ProductModel>();
+                var sourceFull = await _context.Product.AsQueryable().Where(x => x.CategoryId == categoryId).ToListAsync();
+                var source = await _context.Product.AsQueryable().Where(x => x.CategoryId == categoryId).Skip((currentPage - 1) * pageSize).Take(pageSize).OrderBy(x => x.Id).ToListAsync();
+                foreach (Product item in source)
+                {
+                    var model = new ProductModel();
+                    model.Id = item.Id;
+                    model.Code = item.Code;
+                    model.Name = item.Name;
+                    model.Price = item.Price;
+                    model.DisplayImageName = item.DisplayImageName;
+                    var status = await _context.ProductStatus.FirstAsync(x => x.Id == item.ProductStatusId);
+                    model.Status = status.Name;
+                    list.Add(model);
+                }
+                int numberOfPage = (int)Math.Ceiling(sourceFull.Count() / Convert.ToDouble(pageSize));
+                return new
+                {
+                    numberOfPage = numberOfPage,
+                    list = list,
+                };
+            }
             return null;
         }
     }

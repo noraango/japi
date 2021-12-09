@@ -183,11 +183,11 @@ namespace api.Controllers
         }
         [HttpGet]
         [Route("getComment/{id}/{page}/{size}")]
-        public async Task<IActionResult> getComment(int? id,int? page,int? size)
+        public async Task<IActionResult> getComment(int? id, int? page, int? size)
         {
             try
             {
-                var result = await _ProductRepository.GetComment(id ?? default(int),page ?? default(int),size ?? default(int));
+                var result = await _ProductRepository.GetComment(id ?? default(int), page ?? default(int), size ?? default(int));
                 if (result == null)
                 {
                     return NotFound();
@@ -215,6 +215,25 @@ namespace api.Controllers
                 return Ok(result);
             }
             catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpGet]
+        [Route("category/{categoryId}/{page}/{size}")]
+        public async Task<IActionResult> Category(int categoryID, int page, int size)
+        {
+            try
+            {
+                var result = _ProductRepository.GetProductsByCategory(categoryID, page, size);
+                if (result == null)
+                {
+                    return NotFound();
+                }
+                return Ok(result);
+            }
+            catch (Exception ex)
             {
                 return BadRequest();
             }
