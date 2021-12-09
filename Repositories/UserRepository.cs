@@ -139,11 +139,11 @@ namespace api.Repositories
                             phone = user.Phone,
                             email = user.Email,
                             address = user.Address,
-                            ward = ward.Name,
-                            district = district.Name,
-                            province = province.Name,
-                            districtId = district.DistrictId,
-                            provinceId = province.ProvinceId
+                            ward = ward != null ? ward.Name : "",
+                            district = district != null ? district.Name : "",
+                            province = province != null ? province.Name : "",
+                            districtId = district != null ? district.DistrictId : "",
+                            provinceId = province != null ? province.ProvinceId : ""
                         }
                     };
                 }
@@ -184,6 +184,10 @@ namespace api.Repositories
                     var result = await _context.User.FirstOrDefaultAsync(x => x.Email.Equals(data.Email) && x.EncodedPassword.Equals(data.EncodedPassword));
                     if (result != null)
                     {
+                        var cart = new Cart();
+                        cart.UserId = result.UserId;
+                        await _context.Cart.AddAsync(cart);
+                        await _context.SaveChangesAsync();
                         return new
                         {
                             status = true
