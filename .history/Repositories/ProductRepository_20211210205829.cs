@@ -319,5 +319,58 @@ namespace api.Repositories
             }
             return null;
         }
-    }
+
+        public async Task<System.Object> getCategory(int categoryId, int page, int size)
+        {
+            if (_context != null)
+            {
+                var category = await _context.Category.Where(x => x.Id == categoryId).FirstOrDefaultAsync();
+                if (category != null)
+                {
+                    if (category.Level == 1)
+                    {
+                        var categoryList = await _context.Category.Where(x => x.BelongToCategoryId == categoryId).Select(x => x.Id).ToListAsync();
+                        categoryList.Add(category.Id);
+                        if (categoryList.Count() > 0)
+                        {
+                            var result = await _context.Product.Where(x => categoryList.Contains(x.CategoryId)).Skip((page - 1) * size).Take(size).OrderBy(x => x.Id).ToListAsync();
+                            var totalRow = await _context.Product.Where(x => categoryList.Contains(x.CategoryId)).CountAsync();
+                            var totalPage = (totalRow % size == 0) ? (totalRow / size) : (totalRow / size) + 1;
+                            return new
+                            {
+                                totalPage = totalPage,
+                                totalRow = totalRow,
+                                data = result
+                            };
+                        }
+                        else
+                        {
+                            var result = await _context.Product.Where(x => x.CategoryId == categoryId).Skip((page - 1) * size).Take(size).OrderBy(x => x.Id).ToListAsync();
+                            var totalRow = await _context.Product.Where(x => x.CategoryId == categoryId).CountAsync();
+                            var totalPage = (totalRow % size == 0) ? (totalRow / size) : (totalRow / size) + 1;
+                            return new
+                            {
+                                totalPage = totalPage,
+                                totalRow = totalRow,
+                                data = result
+                            };
+                        }
+                    }else{
+                        var result = await _context.Product.Where(x => x.CategoryId == categoryId).Skip((page - 1) * size).Take(size).OrderBy(x => x.Id).ToListAsync();
+                            var totalRow = await _context.Product.Where(x => x.CategoryId == categoryId).CountAsync();
+                            var totalPage = (totalRow % size == 0) ? (totalRow / size) : (totalRow / size) + 1;
+                            return new
+                            {
+                                totalPage = totalPage,
+                                totalRow = totalRow,
+                                data = result
+                            };
+                    }
+                }
+
+            }
+            return null;
+        }
+
+           }
 }

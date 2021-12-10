@@ -16,10 +16,6 @@ namespace api.Models.DBModels
         public int? PackingMethodId { get; set; }
         public int? ProductStatusId { get; set; }
         public string DisplayImageName { get; set; }
-<<<<<<< Updated upstream
-        public int CategoryId { get; set; }
-=======
          public int CategoryId { get; set; }
->>>>>>> Stashed changes
     }
 }

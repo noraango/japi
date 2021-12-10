@@ -480,7 +480,7 @@ namespace api.Repositories
             return null;
         }
 
-         public async Task<System.Object> checkOrder(int id)
+         public async Task<System.Object> getOrderDetail(int id)
         {
 
             if (_context != null)
