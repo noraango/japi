@@ -415,9 +415,69 @@ namespace api.Repositories
             return Task.CompletedTask;
         }
 
-       public async  Task<System.Object> BuyProduct(int productId,int quantity,int userId){
+        public async Task<System.Object> BuyProduct(int productId, int quantity, int userId)
+        {
 
-           return null;
-       }
+            return null;
+        }
+
+        public async Task<System.Object> getAllStoreOrder(int userId, int currentPage, int pageSize)
+        {
+
+            if (_context != null)
+            {
+                var totalRow = await _context.Order.Where(x => x.ShopId == userId).CountAsync();
+                var totalPage = (totalRow % pageSize == 0) ? (totalRow / pageSize) : (totalRow / pageSize) + 1;
+
+                var order = await _context.Order.Where(x => x.ShopId == userId).Skip((currentPage - 1) * pageSize).Take(pageSize).OrderBy(x => x.Id).ToListAsync();
+                return new
+                {
+                    totalPage = totalPage,
+                    totalRow = totalRow,
+                    order = order
+                };
+            }
+            return null;
+        }
+
+        public async Task<System.Object> getOrderDetail(int id)
+        {
+
+            if (_context != null)
+            {
+                var order = await _context.Order.Where(x => x.Id == id).FirstOrDefaultAsync();
+                var buyer = await _context.User.Where(x => x.UserId == order.UserId).FirstOrDefaultAsync();
+                var district = await _context.Set<LocationDistrict>().Where(x => x.DistrictId.Trim() == order.DistrictId.Trim()).FirstOrDefaultAsync();
+                var city = await _context.Set<LocationProvince>().Where(x => x.ProvinceId.Trim() == order.ProvinceId.Trim()).FirstOrDefaultAsync();
+
+
+                List<ProductModel> result = new List<ProductModel>();
+                var orderItems = await _context.OrderItem.AsQueryable().Where(x => x.OrderId == id).ToListAsync();
+                foreach (OrderItem item in orderItems)
+                {
+                    ProductModel model = new ProductModel();
+                    var product = await _context.Product.FirstOrDefaultAsync(x => x.Id == item.ProductId);
+                    model.Id = product.Id;
+                    model.Code = product.Code;
+                    model.Name = product.Name;
+                    model.Price = product.Price;
+                    model.DisplayImageName = product.DisplayImageName;
+                    model.Quantity = item.Quantity;
+                    var status = await _context.ProductStatus.FirstAsync(x => x.Id == product.ProductStatusId);
+                    model.Status = status.Name;
+                    var packing = await _context.ProductPackingMethod.FirstOrDefaultAsync(x => x.Id == product.PackingMethodId);
+                    model.PackingMethod = packing.Name;
+                    result.Add(model);
+                }
+                return new
+                {
+                    list = result,
+                    buyer = buyer,
+                    city = city.Name,
+                    district = district.Name
+                };
+            }
+            return null;
+        }
     }
 }

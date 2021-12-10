@@ -226,5 +226,35 @@ namespace api.Controllers
                 return BadRequest(e.Message);
             }
         }
+
+        [HttpGet]
+        [Route("getStoreOrder")]
+        public async Task<IActionResult> getOrder(int userId,int currentPage,int pageSize)
+        {
+            try
+            {
+                var result = await _OrderRepository.getAllStoreOrder(userId,currentPage,pageSize);
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        [HttpGet]
+        [Route("getOrderDetail")]
+        public async Task<IActionResult> getOrderDetail(int id)
+        {
+            try
+            {
+                var result = await _OrderRepository.getOrderDetail(id);
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
     }
 }

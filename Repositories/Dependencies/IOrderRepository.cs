@@ -22,8 +22,10 @@ namespace api.Repositories.Dependencies
 
         Task<System.Object> CancelOrder(Order order);
 
-         Task<System.Object> ViewOrder(Order order);
+        Task<System.Object> ViewOrder(Order order);
+        Task<System.Object> getAllStoreOrder(int userId,int currentPage,int pageSize);
 
-          Task<System.Object> BuyProduct(int productId,int quantity,int userId);
+        Task<System.Object> getOrderDetail(int id);
+        Task<System.Object> BuyProduct(int productId, int quantity, int userId);
     }
 }
