@@ -178,6 +178,7 @@ namespace api.Repositories
                     model.Code = product.Code;
                     model.Name = product.Name;
                     model.Price = product.Price;
+                    model.Quantity= item.Quantity;
                     model.DisplayImageName = product.DisplayImageName;
                     var status = await _context.ProductStatus.FirstAsync(x => x.Id == product.ProductStatusId);
                     model.Status = status.Name;
@@ -376,6 +377,7 @@ namespace api.Repositories
                     model.Code = product.Code;
                     model.Name = product.Name;
                     model.Price = product.Price;
+                    model.Quantity= item.Quantity;
                     model.DisplayImageName = product.DisplayImageName;
                     var status = await _context.ProductStatus.FirstAsync(x => x.Id == product.ProductStatusId);
                     model.Status = status.Name;
