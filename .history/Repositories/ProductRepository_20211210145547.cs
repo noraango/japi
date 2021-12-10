@@ -241,30 +241,12 @@ namespace api.Repositories
 
         public async Task<System.Object> GetProductsByCategory(int categoryId, int currentPage, int pageSize)
         {
-            if (_context != null)
-            {
-                var list = new List<ProductModel>();
-                var sourceFull = await _context.Product.AsQueryable().Where(x => x.CategoryId == categoryId).ToListAsync();
-                var source = await _context.Product.AsQueryable().Where(x => x.CategoryId == categoryId).Skip((currentPage - 1) * pageSize).Take(pageSize).OrderBy(x => x.Id).ToListAsync();
-                foreach (Product item in source)
-                {
-                    var model = new ProductModel();
-                    model.Id = item.Id;
-                    model.Code = item.Code;
-                    model.Name = item.Name;
-                    model.Price = item.Price;
-                    model.DisplayImageName = item.DisplayImageName;
-                    var status = await _context.ProductStatus.FirstAsync(x => x.Id == item.ProductStatusId);
-                    model.Status = status.Name;
-                    list.Add(model);
-                }
-                int numberOfPage = (int)Math.Ceiling(sourceFull.Count() / Convert.ToDouble(pageSize));
-                return new
-                {
-                    numberOfPage = numberOfPage,
-                    list = list,
-                };
-            }
+            // if (_context != null)
+            // {
+            //     var source = await _context.Product.FirstOrDefaultAsync(x => x. == categoryId);
+            //     var products = await source.Skip((currentPage - 1) * pageSize).Take(pageSize).OrderBy(x => x.Id).ToListAsync();
+            //     return result;
+            // }
             return null;
         }
 
@@ -294,46 +276,6 @@ namespace api.Repositories
                         else
                         {
                             var result = await _context.Product.Where(x => x.CategoryId == categoryId).Skip((page - 1) * size).Take(size).OrderBy(x => x.Id).ToListAsync();
-                            var totalRow = await _context.Product.Where(x => x.CategoryId == categoryId).CountAsync();
-                            var totalPage = (totalRow % size == 0) ? (totalRow / size) : (totalRow / size) + 1;
-                            return new
-                            {
-                                totalPage = totalPage,
-                                totalRow = totalRow,
-                                data = result
-                            };
-                        }
-                    }else{
-                        var result = await _context.Product.Where(x => x.CategoryId == categoryId).Skip((page - 1) * size).Take(size).OrderBy(x => x.Id).ToListAsync();
-                            var totalRow = await _context.Product.Where(x => x.CategoryId == categoryId).CountAsync();
-                            var totalPage = (totalRow % size == 0) ? (totalRow / size) : (totalRow / size) + 1;
-                            return new
-                            {
-                                totalPage = totalPage,
-                                totalRow = totalRow,
-                                data = result
-                            };
-                    }
-                }
-
-            }
-            return null;
-        }
-
-        public async Task<System.Object> getCategory(int categoryId, int page, int size)
-        {
-            if (_context != null)
-            {
-                var category = await _context.Category.Where(x => x.Id == categoryId).FirstOrDefaultAsync();
-                if (category != null)
-                {
-                    if (category.Level == 1)
-                    {
-                        var categoryList = await _context.Category.Where(x => x.BelongToCategoryId == categoryId).Select(x => x.Id).ToListAsync();
-                        categoryList.Add(category.Id);
-                        if (categoryList.Count() > 0)
-                        {
-                            var result = await _context.Product.Where(x => categoryList.Contains(x.CategoryId)).Skip((page - 1) * size).Take(size).OrderBy(x => x.Id).ToListAsync();
                             var totalRow = await _context.Product.Where(x => categoryList.Contains(x.CategoryId)).CountAsync();
                             var totalPage = (totalRow % size == 0) ? (totalRow / size) : (totalRow / size) + 1;
                             return new
@@ -343,28 +285,6 @@ namespace api.Repositories
                                 data = result
                             };
                         }
-                        else
-                        {
-                            var result = await _context.Product.Where(x => x.CategoryId == categoryId).Skip((page - 1) * size).Take(size).OrderBy(x => x.Id).ToListAsync();
-                            var totalRow = await _context.Product.Where(x => x.CategoryId == categoryId).CountAsync();
-                            var totalPage = (totalRow % size == 0) ? (totalRow / size) : (totalRow / size) + 1;
-                            return new
-                            {
-                                totalPage = totalPage,
-                                totalRow = totalRow,
-                                data = result
-                            };
-                        }
-                    }else{
-                        var result = await _context.Product.Where(x => x.CategoryId == categoryId).Skip((page - 1) * size).Take(size).OrderBy(x => x.Id).ToListAsync();
-                            var totalRow = await _context.Product.Where(x => x.CategoryId == categoryId).CountAsync();
-                            var totalPage = (totalRow % size == 0) ? (totalRow / size) : (totalRow / size) + 1;
-                            return new
-                            {
-                                totalPage = totalPage,
-                                totalRow = totalRow,
-                                data = result
-                            };
                     }
                 }
 
