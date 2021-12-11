@@ -249,7 +249,8 @@ insert into [UserRole](Code,[Name]) values
 ('U1','Admin'),
 ('U2','Seller'),
 ('U3','Staff'),
-('U4','Customer');
+('U4','Customer'),
+('U5','Shipper');
 
 select* from [UserRole];
 
@@ -302,7 +303,8 @@ insert into Cart(Code,OrderTime,Note,UserId,OrderStatusId) values
 ('C01','03-11-2021',N'Đóng gói',1,1),
 ('C02','04-11-2021',N'Túi',2,2),
 ('C03','05-11-2021',N'Đựng thùng',3,3),
-('C04','07-11-2021',N'Bao',4,4);
+('C04','07-11-2021',N'Bao',4,4),
+('C05','07-11-2021',N'Bao',5,4);
 
 select *from Cart
 

@@ -42,6 +42,7 @@ namespace api.Repositories
                         item.ProvinceId = model.ProvinceId;
                         item.DistrictId = model.DistrictId;
                         item.ShipperId = model.ShipperId;
+                        item.Price = model.Price;
                         await _context.Order.AddAsync(item);
                         await _context.SaveChangesAsync();
                         var order = await _context.Order.FirstOrDefaultAsync(x => x.Guid == g.ToString());
@@ -178,7 +179,7 @@ namespace api.Repositories
                     model.Code = product.Code;
                     model.Name = product.Name;
                     model.Price = product.Price;
-                    model.Quantity= item.Quantity;
+                    model.Quantity = item.Quantity;
                     model.DisplayImageName = product.DisplayImageName;
                     var status = await _context.ProductStatus.FirstAsync(x => x.Id == product.ProductStatusId);
                     model.Status = status.Name;
@@ -377,7 +378,7 @@ namespace api.Repositories
                     model.Code = product.Code;
                     model.Name = product.Name;
                     model.Price = product.Price;
-                    model.Quantity= item.Quantity;
+                    model.Quantity = item.Quantity;
                     model.DisplayImageName = product.DisplayImageName;
                     var status = await _context.ProductStatus.FirstAsync(x => x.Id == product.ProductStatusId);
                     model.Status = status.Name;
@@ -426,10 +427,10 @@ namespace api.Repositories
 
             if (_context != null)
             {
-                var totalRow = await _context.Order.Where(x => x.ShopId == userId).CountAsync();
+                var totalRow = await _context.Order.CountAsync();
                 var totalPage = (totalRow % pageSize == 0) ? (totalRow / pageSize) : (totalRow / pageSize) + 1;
 
-                var order = await _context.Order.Where(x => x.ShopId == userId).Skip((currentPage - 1) * pageSize).Take(pageSize).OrderBy(x => x.Id).ToListAsync();
+                var order = await _context.Order.AsQueryable().Skip((currentPage - 1) * pageSize).Take(pageSize).OrderBy(x => x.Id).ToListAsync();
                 return new
                 {
                     totalPage = totalPage,
@@ -480,7 +481,7 @@ namespace api.Repositories
             return null;
         }
 
-         public async Task<System.Object> checkOrder(int id)
+        public async Task<System.Object> checkOrder(int id)
         {
 
             if (_context != null)
