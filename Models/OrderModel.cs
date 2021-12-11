@@ -23,6 +23,7 @@ namespace api.Models
         public string EmailAddress { get; set; }
         public string Name { get; set; }
         public string Phone { get; set; }
+        public int Price { get; set; }
     }
 
     public class shipperViewOrder
