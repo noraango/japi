@@ -205,8 +205,8 @@ namespace api.Repositories
             {
                 var totalRow = await _context.ProductRating.AsQueryable().Where(x => x.ProductId == productId).CountAsync();
                 var totalPage = (totalRow % size == 0) ? (totalRow / size) : (totalRow / size) + 1;
-                var ratings = await _context.ProductRating.AsQueryable().Where(x => x.ProductId == productId)
-                .Skip((page - 1) * size).Take(size).OrderByDescending(x => x.RateTime).ToListAsync();
+                var ratings = await _context.ProductRating.AsQueryable().Where(x => x.ProductId == productId).OrderBy(x => x.RateTime)
+                .Skip((page - 1) * size).Take(size).ToListAsync();
                 return new
                 {
                     totalPage = totalPage,
@@ -230,7 +230,7 @@ namespace api.Repositories
                     FirstName = y.FirstName,
                     MiddleName = y.MiddleName,
                     LastName = y.LastName,
-                }).Skip((currentPage - 1) * pageSize).Take(pageSize).OrderBy(x => x.RateTime).ToListAsync();
+                }).Skip((currentPage - 1) * pageSize).Take(pageSize).OrderByDescending(x => x.RateTime).ToListAsync();
                 return new
                 {
                     comments = comments
@@ -303,21 +303,40 @@ namespace api.Repositories
                                 data = result
                             };
                         }
-                    }else{
+                    }
+                    else
+                    {
                         var result = await _context.Product.Where(x => x.CategoryId == categoryId).Skip((page - 1) * size).Take(size).OrderBy(x => x.Id).ToListAsync();
-                            var totalRow = await _context.Product.Where(x => x.CategoryId == categoryId).CountAsync();
-                            var totalPage = (totalRow % size == 0) ? (totalRow / size) : (totalRow / size) + 1;
-                            return new
-                            {
-                                totalPage = totalPage,
-                                totalRow = totalRow,
-                                data = result
-                            };
+                        var totalRow = await _context.Product.Where(x => x.CategoryId == categoryId).CountAsync();
+                        var totalPage = (totalRow % size == 0) ? (totalRow / size) : (totalRow / size) + 1;
+                        return new
+                        {
+                            totalPage = totalPage,
+                            totalRow = totalRow,
+                            data = result
+                        };
                     }
                 }
 
             }
             return null;
+        }
+
+        public async Task<System.Object> Rate(int userId, int productId, int rating, string comment)
+        {
+            if (_context != null)
+            {
+                ProductRating rate = new ProductRating();
+                rate.UserId = userId;
+                rate.ProductId = productId;
+                rate.Rating = rating;
+                rate.Comment = comment;
+                rate.RateTime = DateTime.Now;
+                await _context.ProductRating.AddAsync(rate);
+                await _context.SaveChangesAsync();
+                return new { status = 1, message = "Add rating successfully" };
+            }
+            return new { status = 0, message = "Fail to create Rating" };
         }
     }
 }

@@ -429,7 +429,6 @@ namespace api.Repositories
             {
                 var totalRow = await _context.Order.CountAsync();
                 var totalPage = (totalRow % pageSize == 0) ? (totalRow / pageSize) : (totalRow / pageSize) + 1;
-
                 var order = await _context.Order.AsQueryable().Skip((currentPage - 1) * pageSize).Take(pageSize).OrderBy(x => x.Id).ToListAsync();
                 return new
                 {

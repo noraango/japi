@@ -3,3 +3,6 @@ obj/Debug/net5.0/api.GeneratedMSBuildEditorConfig.editorconfig
 *.cache
 *.dll
 *.exe
+*.cache
+*.dll
+*.dll
