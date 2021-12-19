@@ -20,5 +20,12 @@ namespace api.Repositories.Dependencies
 
         Task<System.Object> GetComment(int productId, int page, int size);
        Task<System.Object>  getCategory(int categoryId,int page,int size);
+
+      Task<System.Object>  ShopProduct(int userId,string querySearch, int currentPage, int pageSize);
+
+      Task<System.Object> addComment(int userId, int productId, int rating,string comment);
+      Task<System.Object> SearchFilter(string querySearch, int price, int rate, int currentPage, int pageSize);
+
+      Task<System.Object> getCategoryFilter(int categoryId, int price, int rate, int page, int size);
     }
 }

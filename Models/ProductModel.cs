@@ -26,5 +26,10 @@ namespace api.Models
         public List<string> imageNames { get; set; }
         public IFormFile DisplayImage { get; set; }
         public double? rating { get; set; }
+        public int shopId { get; set; }
+    }
+
+    public class UserCart{
+        
     }
 }

@@ -184,9 +184,7 @@ namespace api.Repositories
                     var result = await _context.User.FirstOrDefaultAsync(x => x.Email.Equals(data.Email) && x.EncodedPassword.Equals(data.EncodedPassword));
                     if (result != null)
                     {
-                        var cart = new Cart();
-                        cart.UserId = result.UserId;
-                        await _context.Cart.AddAsync(cart);
+                        
                         await _context.SaveChangesAsync();
                         return new
                         {
@@ -324,15 +322,38 @@ namespace api.Repositories
             return null;
         }
 
+        public async Task<object> UpdateInforUser(User user)
+        {
+            if (_context != null)
+            {
+                var data = await _context.User.FirstOrDefaultAsync(x => x.UserId == user.UserId);
+                if (data != null)
+                {
+                    data.FirstName = user.FirstName;
+                    data.Phone = user.Phone;
+                    await _context.SaveChangesAsync();
+                    return new
+                    {
+                        status = true
+                    };
+                }
+            }
+            await _context.SaveChangesAsync();
+            return null;
+        }
         public async Task<object> viewRole(int userId)
         {
             if (_context != null)
             {
-                var item = await _context.RoleRequest.FirstOrDefaultAsync(x => x.UserId == userId);
+                var item = await _context.RoleRequest.FirstOrDefaultAsync(x => x.UserId == userId && x.status != -1);
+                if(item == null){
+                    return null;
+                }
                 var district = await _context.Set<LocationDistrict>().Where(x => x.DistrictId.Trim() == item.DistrictID.Trim()).FirstOrDefaultAsync();
                 var city = await _context.Set<LocationProvince>().Where(x => x.ProvinceId.Trim() == item.ProvinceID.Trim()).FirstOrDefaultAsync();
                 return new
                 {
+                    status = item.status,
                     district = district.Name,
                     city = city.Name,
                     CMTcode = item.CMTCode

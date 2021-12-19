@@ -36,11 +36,11 @@ namespace api.Controllers
         }
         [HttpPost]
         [Route("create")]
-        public async Task<IActionResult> Create([FromForm] OrderModel model)
+        public async Task<IActionResult> Create([FromForm] OrderModel model,int cartId)
         {
             try
             {
-                var result = await _OrderRepository.Create(model);
+                var result = await _OrderRepository.Create(model,cartId);
                 return Ok(result);
             }
             catch (Exception e)

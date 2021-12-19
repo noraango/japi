@@ -135,5 +135,25 @@ namespace api.Controllers
                 return BadRequest();
             }
         }
+
+        [HttpPost]
+        [Route("UpdateInfor")]
+        public async Task<IActionResult> UpdateInfor(int userId,String name, String phone)
+        {
+            try
+            {
+                var result = await _UserRepository.UpdateInforUser(new Models.DBModels.User()
+                {
+                    UserId = userId,
+                    FirstName = name,
+                    Phone = phone
+                });
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                return BadRequest();
+            }
+        }
     }
 }

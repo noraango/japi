@@ -7,6 +7,7 @@ namespace api.Repositories.Dependencies
     public interface IOrderRepository
     {
         Task<int> Create(OrderModel model);
+        Task<int> Create(OrderModel model,int cartId);
         Task<IEnumerable<OrderModel>> GetOrdersByUserId(int userId, int statusId);
         Task<IEnumerable<ProductModel>> GetOrderItemsByOrderId(int orderId);
         Task<int> Update(OrderModel model);

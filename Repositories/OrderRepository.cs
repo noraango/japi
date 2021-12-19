@@ -73,6 +73,56 @@ namespace api.Repositories
             }
         }
 
+        public async Task<int> Create(OrderModel model, int cartId)
+        {
+            try
+            {
+                if (_context != null)
+                {
+                    if (model.UserId != null)
+                    {
+                        var cart = await _context.Cart.FirstOrDefaultAsync(x => x.Id == cartId);
+                        Guid g = Guid.NewGuid();
+                        var item = new Order();
+                        item.Guid = g.ToString();
+                        item.UserId = model.UserId;
+                        item.WeekendDelivery = model.WeekendDelivery;
+                        item.EarliestDeliveryDate = model.EarliestDeliveryDate;
+                        item.LatestDeliveryDate = model.LatestDeliveryDate;
+                        item.Address = model.Address;
+                        item.WardId = model.WardId;
+                        item.OrderStatusId = 1;
+                        item.WeekendDelivery = true;
+                        item.ProvinceId = model.ProvinceId;
+                        item.DistrictId = model.DistrictId;
+                        item.ShopId = cart.shopId;
+                        item.Price = model.Price;
+                        await _context.Order.AddAsync(item);
+                        await _context.SaveChangesAsync();
+                        var order = await _context.Order.FirstOrDefaultAsync(x => x.Guid == g.ToString());
+                        var cartItems = await _context.CartItem.AsQueryable().Where(x => x.CartId == cart.Id).ToListAsync();
+                        foreach (CartItem cartItem in cartItems)
+                        {
+                            OrderItem orderItem = new OrderItem();
+                            orderItem.OrderId = order.Id;
+                            orderItem.ProductId = cartItem.ProductId;
+                            orderItem.Quantity = cartItem.Quantity;
+                            await _context.OrderItem.AddAsync(orderItem);
+                        }
+
+                        await _context.Database.ExecuteSqlRawAsync("delete from CartItem where CartId = " + cart.Id);
+                        _context.Cart.Remove(cart);
+                        await _context.SaveChangesAsync();
+                        return 1;
+                    }
+                }
+                return 0;
+            }
+            catch (Exception e)
+            {
+                return 0;
+            }
+        }
         public async Task<object> CustomerCancel(Order order)
         {
             if (_context != null)
@@ -208,6 +258,7 @@ namespace api.Repositories
                     model.Id = item.Id;
                     model.UserId = item.UserId;
                     model.Address = item.Address;
+                    model.Price = (int)item.Price;
                     var district = await _context.LocationDistrict.FirstOrDefaultAsync(x => x.DistrictId == item.DistrictId);
                     model.DistrictId = item.DistrictId;
                     model.District = district.Name;
@@ -418,8 +469,32 @@ namespace api.Repositories
 
         public async Task<System.Object> BuyProduct(int productId, int quantity, int userId)
         {
+            if (_context != null)
+            {
+                var product = await _context.Product.Where(x => x.Id == productId).FirstOrDefaultAsync();
 
-            return null;
+                if (product == null)
+                {
+                    return 0;
+                }
+                var cart = new Cart();
+                cart.UserId = userId;
+                cart.OrderTime = System.DateTime.Now;
+                cart.OrderStatusId = 1;
+                cart.shopId = product.shopId;
+                await _context.Cart.AddAsync(cart);
+                int index = _context.SaveChanges();
+
+                CartItem item = new CartItem();
+                item.CartId = cart.Id;
+                item.ProductId = productId;
+                item.Quantity = quantity;
+                await _context.CartItem.AddAsync(item);
+                await _context.SaveChangesAsync();
+                return cart.Id;
+            }
+            return 0;
+
         }
 
         public async Task<System.Object> getAllStoreOrder(int userId, int currentPage, int pageSize)
@@ -427,10 +502,10 @@ namespace api.Repositories
 
             if (_context != null)
             {
-                var totalRow = await _context.Order.CountAsync();
+                var totalRow = await _context.Order.Where(x => x.ShopId == userId).CountAsync();
                 var totalPage = (totalRow % pageSize == 0) ? (totalRow / pageSize) : (totalRow / pageSize) + 1;
 
-                var order = await _context.Order.AsQueryable().Skip((currentPage - 1) * pageSize).Take(pageSize).OrderBy(x => x.Id).ToListAsync();
+                var order = await _context.Order.Where(x => x.ShopId == userId).Skip((currentPage - 1) * pageSize).Take(pageSize).OrderBy(x => x.Id).ToListAsync();
                 return new
                 {
                     totalPage = totalPage,
@@ -496,5 +571,6 @@ namespace api.Repositories
             }
             return null;
         }
+
     }
 }

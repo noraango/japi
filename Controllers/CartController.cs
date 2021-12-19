@@ -35,6 +35,42 @@ namespace api.Controllers
                 return BadRequest();
             }
         }
+        [HttpGet]
+        [Route("getList/{userId}")]
+        public async Task<IActionResult> GetListCart(int userId)
+        {
+            try
+            {
+                var result = await _CartRepository.GetAllCart(userId);
+                if (result == null)
+                {
+                    return NotFound();
+                }
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                return BadRequest();
+            }
+        }
+        [HttpGet]
+        [Route("getCart/{cartId}")]
+        public async Task<IActionResult> getCart(int cartId)
+        {
+            try
+            {
+                var result = await _CartRepository.GetCartByCartId(cartId);
+                if (result == null)
+                {
+                    return NotFound();
+                }
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                return BadRequest();
+            }
+        }
         [HttpPost]
         [Route("add/{productId}/{userId}/{quantity}")]
         public async Task<IActionResult> AddItemToCart(int productId, int userId, int quantity)
@@ -52,7 +88,7 @@ namespace api.Controllers
 
         [HttpPost]
         [Route("update/{productId}/{userId}/{quantity}")]
-        public async Task<IActionResult> DeleteItemFromCart(int productId, int userId, int quantity)
+        public async Task<IActionResult> updateFromCart(int productId, int userId, int quantity)
         {
             try
             {
@@ -66,12 +102,27 @@ namespace api.Controllers
         }
 
         [HttpDelete]
-        [Route("delete/{productId}/{userId}")]
-        public async Task<IActionResult> DeleteItemFromCart(int productId, int userId)
+        [Route("delete/{productId}/{cartId}/{userId}")]
+        public async Task<IActionResult> DeleteItemFromCart(int productId,int cartId, int userId)
         {
             try
             {
-                var result = await _CartRepository.DeleteItemFromCart(productId, userId);
+                var result = await _CartRepository.DeleteItemFromCart(productId,cartId, userId);
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpGet]
+        [Route("countNumber")]
+        public async Task<IActionResult> countNumber(int userId)
+        {
+            try
+            {
+                var result = await _CartRepository.getCartCount(userId);
                 return Ok(result);
             }
             catch (Exception e)

@@ -18,5 +18,6 @@ namespace api.Repositories.Dependencies
 
          Task<object> viewRole(int userId);
          Task<object> CheckEmail(string email);
+         Task<object> UpdateInforUser(User user);
     }
 }

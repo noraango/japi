@@ -9,5 +9,7 @@ namespace api.Models.DBModels
         public string Note { get; set; }
         public int? UserId { get; set; }
         public int? OrderStatusId { get; set; }
+
+        public int? shopId { get; set; }
     }
 }
