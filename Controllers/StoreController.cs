@@ -46,6 +46,38 @@ namespace api.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("detail")]
+        public async Task<IActionResult> Detail(int storeId, int? page, int? size)
+        {
+            try
+            {
+                int currentPage = page != null ? (int)page : 1;
+                int pageSize = size != null ? (int)size : 9;
+                var result = await _StorageRepository.Detail(storeId, currentPage, pageSize);
+                return Ok(result);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpPost]
+        [Route("deleteItem")]
+        public async Task<IActionResult> DelteItem(int id)
+        {
+            try
+            {
+                var result = await _StorageRepository.DeleteItem(id);
+                return Ok(result);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
         [HttpPost]
         [Route("update")]
         public async Task<IActionResult> Update([FromForm] Models.DBModels.Store storage)

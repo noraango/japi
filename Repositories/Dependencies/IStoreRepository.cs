@@ -10,5 +10,7 @@ namespace api.Repositories.Dependencies
         Task<IEnumerable<Store>> Read();
         Task<int> Update(Store data);
         Task<int> Delete(int id);
+        Task<int> DeleteItem(int id);
+        Task<System.Object> Detail(int id, int page, int size);
     }
 }
